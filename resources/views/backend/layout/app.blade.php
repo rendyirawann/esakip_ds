@@ -48,8 +48,61 @@
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.4);
-            z-index: 104;
+            z-index: 99;
         }
+
+        /* Right Side Modal (Drawer style) */
+        .modal.modal-right .modal-dialog {
+            margin: 0 0 0 auto;
+            max-width: 500px;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .modal.modal-right .modal-content {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            border-radius: 0;
+            border: none;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .modal.modal-right .modal-content > form {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
+        }
+        .modal.modal-right.fade .modal-dialog {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .modal.modal-right.show .modal-dialog {
+            transform: translateX(0);
+        }
+        .modal.modal-right .modal-body {
+            flex: 1 1 auto;
+            overflow-y: auto;
+            padding: 1.5rem;
+            position: relative;
+        }
+        .modal.modal-right .modal-header {
+            flex-shrink: 0;
+            background: white;
+            z-index: 5;
+            border-bottom: 1px solid #eff2f5;
+        }
+        .modal.modal-right .modal-footer {
+            flex-shrink: 0;
+            padding: 1.25rem 1.5rem;
+            background: white;
+            z-index: 5;
+            border-top: 1px solid #eff2f5;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
         .sidebar-overlay.active { display: block; }
         /* Custom sidebar styles for Demo 11 */
         #kt_app_sidebar {
@@ -70,8 +123,8 @@
             background: #1e1e2d;
             border-right-color: rgba(255,255,255,0.07);
         }
-        /* Custom modal sliding from right */
-        .modal.fade .modal-dialog {
+        /* Custom modal sliding from right (Drawer Style) */
+        .modal.drawer.fade .modal-dialog {
             position: fixed;
             margin: auto;
             width: 100%;
@@ -80,42 +133,101 @@
             transform: translate3d(0%, 0, 0);
             transition: right 0.3s ease-out;
         }
-        .modal.show .modal-dialog {
+        .modal.drawer.show .modal-dialog {
             right: 0;
         }
-        .modal-content {
-            height: 100%;
-            overflow-y: auto;
+        .modal.drawer .modal-content {
+            height: 100vh;
             border-radius: 0;
+            border: none;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        }
+        .modal.drawer .modal-header {
+            border-radius: 0;
+            padding: 1.5rem;
+            background: var(--bs-body-bg);
+            border-bottom: 1px solid var(--bs-gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+        .modal.drawer .modal-footer {
+            border-radius: 0;
+            padding: 1.5rem;
+            background: var(--bs-body-bg);
+            border-top: 1px solid var(--bs-gray-200);
+            position: sticky;
+            bottom: 0;
+            z-index: 2;
+        }
+        .modal.drawer .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
         }
         @media (min-width: 576px) {
-            .modal-dialog {
+            .modal.drawer .modal-dialog {
                 max-width: 500px;
                 right: -500px;
                 margin: 0;
             }
         }
         @media (min-width: 992px) {
-            .modal-dialog.modal-lg, .modal-dialog.modal-xl, .modal-dialog.mw-750px, .modal-dialog.mw-950px {
-                max-width: 600px;
-                right: -600px;
+            .modal.drawer .modal-dialog.modal-lg, 
+            .modal.drawer .modal-dialog.modal-xl, 
+            .modal.drawer .modal-dialog.mw-750px, 
+            .modal.drawer .modal-dialog.mw-950px {
+                max-width: 700px;
+                right: -700px;
             }
-            .modal.show .modal-dialog.modal-lg, .modal.show .modal-dialog.modal-xl, .modal.show .modal-dialog.mw-750px, .modal.show .modal-dialog.mw-950px {
+            .modal.drawer.show .modal-dialog.modal-lg, 
+            .modal.drawer.show .modal-dialog.modal-xl, 
+            .modal.drawer.show .modal-dialog.mw-750px, 
+            .modal.drawer.show .modal-dialog.mw-950px {
                 right: 0;
             }
         }
-        .modal-body {
-            overflow-y: auto;
+
+        /* Loading Spinner Overlay */
+        #global_loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        [data-bs-theme="dark"] #global_loader {
+            background: rgba(30, 30, 45, 0.7);
         }
     </style>
     <script>
+        function hideLoader() {
+            const loader = document.getElementById('global_loader');
+            if (loader) loader.style.display = 'none';
+            document.querySelectorAll('[data-kt-indicator="on"]').forEach(btn => {
+                btn.removeAttribute('data-kt-indicator');
+                btn.disabled = false;
+            });
+        }
+    </script>
+    <script>
         if (window.top != window.self) { window.top.location.replace(window.self.location.href); }
     </script>
+    <style>
+        .ck-editor__editable {
+            min-height: 200px;
+        }
+        .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+            border-color: var(--bs-gray-300);
+            background-color: var(--bs-gray-100);
+        }
+    </style>
     @stack('stylesheets')
 </head>
 <!--end::Head-->
 <!--begin::Body-->
-<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled">
+<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed">
     <!--begin::Theme mode setup on page load-->
     <script>
         var defaultThemeMode = "light";
@@ -138,6 +250,14 @@
     </script>
     <!--end::Theme mode setup on page load-->
     <!--begin::Main-->
+    <!--begin::Global Loader-->
+    <div id="global_loader">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <!--end::Global Loader-->
+
     <!--begin::Root-->
     <div class="d-flex flex-column flex-root">
         <!--begin::Page-->
@@ -150,24 +270,29 @@
                     <div class="container-xxl d-flex flex-grow-1 flex-stack">
                         <!--begin::Header Logo-->
                         <div class="d-flex align-items-center me-5">
-                            <!--begin::Sidebar toggle (mobile)-->
-                            <div class="d-lg-none btn btn-icon btn-active-color-primary w-30px h-30px ms-n2 me-3" id="kt_app_sidebar_toggle">
-                                <i class="ki-duotone ki-abstract-14 fs-2"><span class="path1"></span><span class="path2"></span></i>
+                            <!--begin::Sidebar toggle-->
+                            <div class="btn btn-icon btn-active-color-primary w-30px h-30px ms-n2 me-3" id="kt_app_sidebar_toggle">
+                                <i class="ki-outline ki-abstract-14 fs-2"></i>
                             </div>
                             <!--end::Sidebar toggle-->
-                            <!--begin::Header menu toggle (mobile)-->
-                            <div class="d-lg-none btn btn-icon btn-active-color-primary w-30px h-30px me-3" id="kt_header_menu_toggle">
-                                <i class="ki-duotone ki-text-align-left fs-2"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
-                            </div>
-                            <!--end::Header menu toggle-->
+                            
                             <a href="{{ route('dashboard') }}">
                                 <img alt="Logo" src="{{ asset('assets/media/logos/' . $siteLogo) }}" class="theme-light-show h-20px h-lg-30px" />
                                 <img alt="Logo" src="{{ asset('assets/media/logos/' . $siteLogo) }}" class="theme-dark-show h-20px h-lg-30px" />
                             </a>
                         </div>
                         <!--end::Header Logo-->
+
                         <!--begin::Topbar-->
-                        @include('backend.layout.navbar')
+                        <div class="d-flex align-items-center">
+                            @include('backend.layout.navbar')
+                            
+                            <!--begin::Header menu toggle (mobile)-->
+                            <div class="d-lg-none btn btn-icon btn-active-color-primary w-30px h-30px ms-2" id="kt_header_menu_toggle">
+                                <i class="ki-outline ki-text-align-left fs-2"></i>
+                            </div>
+                            <!--end::Header menu toggle-->
+                        </div>
                         <!--end::Topbar-->
                     </div>
                     <!--end::Container-->
@@ -196,6 +321,15 @@
                     <!--end::Content-->
                 </div>
                 <!--end::Container-->
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Page-->
+    </div>
+    <!--end::Root-->
+
+    <!-- Modal Placeholder for Global Yield if needed -->
+    @yield('modals')
 
                 <!--begin::Footer-->
                 @include('backend.layout.footer')
@@ -229,14 +363,15 @@
             // --- Sidebar Toggle ---
             const sidebar = document.getElementById('kt_app_sidebar');
             const overlay = document.getElementById('kt_sidebar_overlay');
-            const toggleBtns = document.querySelectorAll('#kt_app_sidebar_toggle, #kt_sidebar_toggle_desktop');
+            const toggleBtn = document.getElementById('kt_app_sidebar_toggle');
 
-            toggleBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', function() {
                     sidebar.classList.toggle('active');
                     overlay.classList.toggle('active');
                 });
-            });
+            }
+            
             if (overlay) {
                 overlay.addEventListener('click', function() {
                     sidebar.classList.remove('active');
@@ -244,49 +379,57 @@
                 });
             }
 
-            // --- Global Form Submit Spinner ---
-            document.querySelectorAll('form:not([data-kt-no-indicator])').forEach(form => {
+            // --- Global Form Submit Spinner (Only for non-AJAX forms) ---
+            document.querySelectorAll('form:not([data-kt-no-indicator]):not(.ajax-form)').forEach(form => {
                 form.addEventListener('submit', function(e) {
+                    if (!this.checkValidity()) return;
+
                     const submitBtn = this.querySelector('[type="submit"]');
+                    const loader = document.getElementById('global_loader');
+                    
                     if (submitBtn) {
                         submitBtn.setAttribute('data-kt-indicator', 'on');
                         submitBtn.disabled = true;
-                        
-                        // Fallback text change if kt-indicator is not fully supported on the button
-                        if(!submitBtn.querySelector('.indicator-progress')) {
-                            const originalText = submitBtn.innerHTML;
-                            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm align-middle ms-2"></span> Loading...';
-                        }
+                    }
+                    
+                    if (loader && !this.classList.contains('no-loader')) {
+                        loader.style.display = 'flex';
                     }
                 });
             });
 
             // --- Global SweetAlert for Session ---
+            const swalConfig = {
+                buttonsStyling: false,
+                confirmButtonText: "Ok, Lanjutkan",
+                customClass: { confirmButton: "btn btn-primary" }
+            };
+
             @if(session('success'))
-                Swal.fire({ text: "{!! session('success') !!}", icon: "success", buttonsStyling: false, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } });
+                Swal.fire({ ...swalConfig, text: "{!! session('success') !!}", icon: "success" });
             @endif
             @if(session('error'))
-                Swal.fire({ text: "{!! session('error') !!}", icon: "error", buttonsStyling: false, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-danger" } });
+                Swal.fire({ ...swalConfig, text: "{!! session('error') !!}", icon: "error", customClass: { confirmButton: "btn btn-danger" } });
             @endif
             @if(session('warning'))
-                Swal.fire({ text: "{!! session('warning') !!}", icon: "warning", buttonsStyling: false, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-warning" } });
-            @endif
-            @if(session('info'))
-                Swal.fire({ text: "{!! session('info') !!}", icon: "info", buttonsStyling: false, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-info" } });
+                Swal.fire({ ...swalConfig, text: "{!! session('warning') !!}", icon: "warning", customClass: { confirmButton: "btn btn-warning" } });
             @endif
 
             // --- Global SweetAlert for Validation Errors ---
             @if($errors->any())
-                let errorMessages = '';
+                let errorList = '';
                 @foreach($errors->all() as $error)
-                    errorMessages += '<li class="text-start">{{ $error }}</li>';
+                    errorList += `<div class="d-flex align-items-center mb-2">
+                        <i class="ki-outline ki-cross-circle fs-3 text-danger me-2"></i>
+                        <span>{{ $error }}</span>
+                    </div>`;
                 @endforeach
                 Swal.fire({
-                    html: `<ul class="m-0">${errorMessages}</ul>`,
+                    html: `<div class="text-start">${errorList}</div>`,
                     icon: 'error',
-                    title: 'Validasi Gagal',
+                    title: 'Ada Kesalahan Input',
                     buttonsStyling: false,
-                    confirmButtonText: 'Tutup',
+                    confirmButtonText: 'Perbaiki Sekarang',
                     customClass: { confirmButton: 'btn btn-danger' }
                 });
             @endif
@@ -312,7 +455,7 @@
                             resultsEl.classList.remove('d-none');
                             let html = '';
                             filtered.forEach(p => {
-                                html += `<a href="${p.url}" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5"><div class="symbol symbol-40px me-4"><span class="symbol-label bg-light"><i class="ki-duotone ${p.icon} fs-2 text-primary"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i></span></div><div class="d-flex flex-column"><span class="fs-6 fw-bold">${p.title}</span><span class="fs-7 fw-semibold text-muted">${p.desc}</span></div></a>`;
+                                html += `<a href="${p.url}" class="d-flex text-gray-900 text-hover-primary align-items-center mb-5"><div class="symbol symbol-40px me-4"><span class="symbol-label bg-light"><i class="ki-outline ${p.icon} fs-2 text-primary"></i></span></div><div class="d-flex flex-column"><span class="fs-6 fw-bold">${p.title}</span><span class="fs-7 fw-semibold text-muted">${p.desc}</span></div></a>`;
                             });
                             resultsContainer.innerHTML = html;
                         } else {

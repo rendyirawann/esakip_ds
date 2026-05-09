@@ -56,6 +56,23 @@ class AuthenticatedSessionController extends Controller
             ]);
         }
 
+        // 4.1 Cek Peran (Role) - SKPD tidak boleh masuk backend
+        if ($user->hasRole(['skpd', 'SKPD']) && !$user->hasAnyRole(['Superadmin', 'superadmin', 'Admin', 'admin'])) {
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Akun SKPD hanya dapat login melalui portal frontend.',
+                ], 403);
+            }
+            throw ValidationException::withMessages([
+                'email' => 'Akun SKPD hanya dapat login melalui portal frontend.',
+            ]);
+        }
+
         // 5. Update Data User (IP & Last Login)
         $user->update([
             'last_ip' => $request->ip(),

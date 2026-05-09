@@ -36,6 +36,104 @@
                 </div>
             </div>
 
+            <!--begin::SAKIP Data Master-->
+            <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is('admin/sakip*') ? 'here show' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <i class="ki-duotone ki-save-2 fs-3"><span class="path1"></span><span class="path2"></span></i>
+                    </span>
+                    <span class="menu-title">SAKIP Data Master</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion {{ request()->is('admin/sakip*') ? 'show' : '' }}">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/sakip/urusan*') ? 'active' : '' }}" href="{{ route('sakip.urusan.index') }}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Urusan</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/sakip/bidang*') ? 'active' : '' }}" href="{{ route('sakip.bidang.index') }}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Bidang</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/sakip/periode*') ? 'active' : '' }}" href="{{ route('sakip.periode.index') }}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Periode</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/sakip/visi*') ? 'active' : '' }}" href="{{ route('sakip.visi.index') }}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Visi</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/sakip/misi*') ? 'active' : '' }}" href="{{ route('sakip.misi.index') }}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Misi</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/sakip/program*') ? 'active' : '' }}" href="{{ route('sakip.program.index') }}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Program</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/sakip/kegiatan*') ? 'active' : '' }}" href="{{ route('sakip.kegiatan.index') }}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Kegiatan</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/sakip/subkegiatan*') ? 'active' : '' }}" href="{{ route('sakip.subkegiatan.index') }}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Sub Kegiatan</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/sakip/skpd*') ? 'active' : '' }}" href="{{ route('sakip.skpd.index') }}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">SKPD & Penjabat</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/sakip/pimpinan*') ? 'active' : '' }}" href="{{ route('sakip.pimpinan.index') }}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Pimpinan</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/sakip/subunit*') ? 'active' : '' }}" href="{{ route('sakip.subunit.index') }}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Subunit</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/sakip/title*') ? 'active' : '' }}" href="{{ route('sakip.title.index') }}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Title Jabatan</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/sakip/unitkerja*') ? 'active' : '' }}" href="{{ route('sakip.unitkerja.index') }}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Unit Kerja</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/sakip/pegawaibappeda*') ? 'active' : '' }}" href="{{ route('sakip.pegawaibappeda.index') }}">
+                            <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                            <span class="menu-title">Pegawai Bappeda</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--end::SAKIP Data Master-->
+
             <!--begin::User Management-->
             @role('Superadmin|superadmin')
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is('admin/users*') || request()->is('admin/roles*') ? 'here show' : '' }}">

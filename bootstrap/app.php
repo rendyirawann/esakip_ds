@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -30,6 +32,20 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: [
             'api/midtrans-webhook',
         ]);
+
+        $middleware->redirectUsersTo(function () {
+            if (Auth::guard('frontend')->check()) {
+                return route('frontend.dashboard');
+            }
+            return route('dashboard');
+        });
+
+        $middleware->redirectTo(function ($request) {
+            if ($request->is('frontend/*')) {
+                return route('frontend.login');
+            }
+            return route('login');
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

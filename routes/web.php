@@ -19,6 +19,10 @@ use App\Http\Controllers\Backend\UserManagement\RoleController;
 use App\Http\Controllers\Backend\Help\LogActivityController;
 use App\Http\Controllers\Backend\Settings\SettingController;
 
+// Frontend Controllers
+use App\Http\Controllers\Frontend\Auth\FrontendLoginController;
+use App\Http\Controllers\Frontend\Dashboard\FrontendDashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -135,6 +139,36 @@ Route::middleware(['auth', 'forbid-banned-user'])->group(function () {
     });
 
     // ====================================================
+    // SAKIP DATA MASTER
+    // ====================================================
+    Route::prefix('admin/sakip')->name('sakip.')->group(function () {
+        Route::resource('urusan', \App\Http\Controllers\Backend\Sakip\SakipUrusanController::class);
+        Route::resource('bidang', \App\Http\Controllers\Backend\Sakip\SakipBidangController::class);
+        Route::get('bidang/get-by-urusan/{urusan_id}', [\App\Http\Controllers\Backend\Sakip\SakipBidangController::class, 'getByUrusan'])->name('bidang.get-by-urusan');
+        Route::resource('periode', \App\Http\Controllers\Backend\Sakip\SakipPeriodeController::class);
+        Route::resource('program', \App\Http\Controllers\Backend\Sakip\SakipProgramController::class);
+        Route::get('program/get-by-bidang/{bidang_id}', [\App\Http\Controllers\Backend\Sakip\SakipProgramController::class, 'getByBidang'])->name('program.get-by-bidang');
+        Route::resource('visi', \App\Http\Controllers\Backend\Sakip\SakipVisiController::class);
+        Route::get('visi/get-by-periode/{periode_id}', [\App\Http\Controllers\Backend\Sakip\SakipVisiController::class, 'getByPeriode'])->name('visi.get-by-periode');
+        Route::resource('misi', \App\Http\Controllers\Backend\Sakip\SakipMisiController::class);
+        Route::resource('kegiatan', \App\Http\Controllers\Backend\Sakip\SakipKegiatanController::class);
+        Route::get('kegiatan/get-by-program/{program_id}', [\App\Http\Controllers\Backend\Sakip\SakipKegiatanController::class, 'getByProgram'])->name('kegiatan.get-by-program');
+        Route::resource('subkegiatan', \App\Http\Controllers\Backend\Sakip\SakipSubkegiatanController::class);
+        Route::resource('pimpinan', \App\Http\Controllers\Backend\Sakip\SakipPimpinanController::class);
+        Route::resource('subunit', \App\Http\Controllers\Backend\Sakip\SakipSubunitController::class);
+        Route::resource('title', \App\Http\Controllers\Backend\Sakip\SakipTitleController::class);
+        Route::resource('unitkerja', \App\Http\Controllers\Backend\Sakip\SakipUnitkerjaController::class);
+        Route::resource('pegawaibappeda', \App\Http\Controllers\Backend\Sakip\SakipPegawaibappedaController::class);
+        
+        // SKPD & Penjabat (Combined)
+        Route::resource('skpd', \App\Http\Controllers\Backend\Sakip\SakipSkpdController::class);
+        Route::get('skpd/penjabat/{skpd_id}', [\App\Http\Controllers\Backend\Sakip\SakipSkpdController::class, 'getPenjabat'])->name('skpd.penjabat');
+        Route::post('skpd/penjabat-store', [\App\Http\Controllers\Backend\Sakip\SakipSkpdController::class, 'storePenjabat'])->name('skpd.store-penjabat');
+        Route::get('skpd/penjabat-edit/{id}', [\App\Http\Controllers\Backend\Sakip\SakipSkpdController::class, 'editPenjabat'])->name('skpd.edit-penjabat');
+        Route::delete('skpd/penjabat-delete/{id}', [\App\Http\Controllers\Backend\Sakip\SakipSkpdController::class, 'destroyPenjabat'])->name('skpd.destroy-penjabat');
+    });
+
+    // ====================================================
     // HELP (Log Activity): view_help — Superadmin, admin
     // ====================================================
     Route::middleware('can:view_help')->group(function () {
@@ -145,3 +179,33 @@ Route::middleware(['auth', 'forbid-banned-user'])->group(function () {
 
 // Load Routes Authentication (Login, Register, Reset Password)
 require __DIR__ . '/auth.php';
+
+// ====================================================
+// FRONTEND ROUTES
+// ====================================================
+Route::prefix('frontend')->name('frontend.')->group(function () {
+    
+    // Guest Routes
+    Route::middleware('guest:frontend')->group(function () {
+        Route::get('login', [FrontendLoginController::class, 'create'])->name('login');
+        Route::post('login', [FrontendLoginController::class, 'store']);
+    });
+
+    // Authenticated Routes
+    Route::middleware(['auth:frontend', 'forbid-banned-user'])->group(function () {
+        Route::get('dashboard', [FrontendDashboardController::class, 'index'])->name('dashboard');
+        Route::post('logout', [FrontendLoginController::class, 'destroy'])->name('logout');
+        
+        // RENSTRA
+        Route::prefix('renstra')->name('renstra.')->group(function () {
+            Route::get('dataskpd', [\App\Http\Controllers\Frontend\Renstra\DataSkpdController::class, 'index'])->name('dataskpd.index');
+            
+            // Sasaran Renstra
+            Route::resource('sasaran', \App\Http\Controllers\Frontend\Renstra\SasaranRenstraController::class);
+            Route::get('get-sasaran-rpjmd/{periode_id}', [\App\Http\Controllers\Frontend\Renstra\SasaranRenstraController::class, 'getSasaranRpjmd'])->name('sasaran.get-rpjmd');
+        });
+        
+        // Add more frontend routes here
+    });
+});
+

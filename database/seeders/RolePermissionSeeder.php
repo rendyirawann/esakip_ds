@@ -24,30 +24,31 @@ class RolePermissionSeeder extends Seeder
             'view_data_master',
             'view_resources',
             'view_help',
+            'view_renstra',
         ];
 
-        // --- Granular User Management ---
+        // --- User Management ---
         $userPermissions = [
-            'user.show',
-            'user.create',
-            'user.edit',
-            'user.delete',
-            'user.massdelete',
-            'user.ban',
+            'user.show', 'user.create', 'user.edit', 'user.delete', 'user.massdelete', 'user.ban',
         ];
 
-        // --- Granular Role Management ---
+        // --- Role Management ---
         $rolePermissions = [
-            'role.show',
-            'role.create',
-            'role.edit',
-            'role.delete',
-            'role.massdelete',
+            'role.show', 'role.create', 'role.edit', 'role.delete', 'role.massdelete',
+        ];
+
+        // --- Renstra Permissions ---
+        $renstraPermissions = [
+            'renstra.dataskpd.view',
+            'renstra.sasaran.view',
+            'renstra.sasaran.create',
+            'renstra.sasaran.edit',
+            'renstra.sasaran.delete',
         ];
 
         // Create all permissions
         $allPermissions = array_merge(
-            $navPermissions, $userPermissions, $rolePermissions
+            $navPermissions, $userPermissions, $rolePermissions, $renstraPermissions
         );
 
         foreach ($allPermissions as $permission) {
@@ -55,25 +56,32 @@ class RolePermissionSeeder extends Seeder
         }
 
         // ================================================
-        // 2. CREATE ROLES (if they don't exist)
+        // 2. CREATE ROLES
         // ================================================
         $roleSuperadmin = Role::firstOrCreate(['name' => 'Superadmin']);
         $roleAdmin      = Role::firstOrCreate(['name' => 'admin']);
+        $roleSkpd       = Role::firstOrCreate(['name' => 'skpd']);
 
         // ================================================
         // 3. ASSIGN PERMISSIONS TO ROLES
         // ================================================
 
-        // SUPERADMIN — gets everything implicitly via Gate::before in AppServiceProvider
-        // But we still assign explicitly for completeness
+        // SUPERADMIN
         $roleSuperadmin->syncPermissions(Permission::all());
 
-        // ADMIN — All except Resources (User/Role Management)
-        $adminPermissions = [
-            'view_dashboard',
-            'view_data_master',
-            'view_help',
-        ];
+        // ADMIN
+        $adminPermissions = array_merge($navPermissions, $renstraPermissions);
         $roleAdmin->syncPermissions($adminPermissions);
+
+        // SKPD
+        $skpdPermissions = [
+            'view_dashboard',
+            'view_renstra',
+            'renstra.dataskpd.view',
+            'renstra.sasaran.view',
+            'renstra.sasaran.create',
+            'renstra.sasaran.edit',
+        ];
+        $roleSkpd->syncPermissions($skpdPermissions);
     }
 }

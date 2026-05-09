@@ -1,0 +1,321 @@
+@extends('backend.layout.app')
+@section('title', 'Manajemen Sub Kegiatan SAKIP')
+
+@section('content')
+    <!--begin::Toolbar-->
+    <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-0">
+        <!--begin::Toolbar container-->
+        <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+            <!--begin::Page title-->
+            <div class="page-title d-flex flex-column justify-content-center me-3">
+                <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
+                    Manajemen Sub Kegiatan</h1>
+                <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                    <li class="breadcrumb-item text-gray-700 fw-bold lh-1">
+                        <a href="{{ route('dashboard') }}" class="text-hover-primary">
+                            <i class="ki-outline ki-home text-gray-700 fs-6"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <i class="ki-outline ki-right fs-5 text-gray-700 mx-n1"></i>
+                    </li>
+                    <li class="breadcrumb-item text-gray-700 fw-bold lh-1">SAKIP Data Master</li>
+                    <li class="breadcrumb-item">
+                        <i class="ki-outline ki-right fs-5 text-gray-700 mx-n1"></i>
+                    </li>
+                    <li class="breadcrumb-item text-gray-900">Manajemen Sub Kegiatan</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--end::Toolbar-->
+
+    <div class="card card-flush shadow-sm">
+    <div class="card-header border-0 pt-6">
+        <div class="card-title">
+            <div class="d-flex align-items-center position-relative my-1">
+                <i class="ki-outline ki-magnifier fs-3 position-absolute ms-5"></i>
+                <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="Cari Sub Kegiatan..." />
+            </div>
+        </div>
+        <div class="card-toolbar">
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-primary" onclick="addData()">
+                    <i class="ki-outline ki-plus fs-2"></i> Tambah Sub Kegiatan
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body py-4">
+        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_subkegiatan">
+            <thead>
+                <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                    <th class="min-w-50px">No</th>
+                    <th class="min-w-150px">Kegiatan</th>
+                    <th class="min-w-100px">Kode</th>
+                    <th class="min-w-200px">Nama Sub Kegiatan</th>
+                    <th class="min-w-80px">Status</th>
+                    <th class="text-end min-w-100px">Aksi</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-600 fw-semibold">
+            </tbody>
+        </table>
+    </div>
+</div>
+@endsection
+
+@section('modals')
+<!-- Modal -->
+<div class="modal fade modal-right" id="modal_subkegiatan" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="form_subkegiatan" class="ajax-form" action="javascript:void(0)">
+                @csrf
+                <input type="hidden" name="id" id="subkegiatan_id">
+                <div class="modal-header">
+                    <h2 class="fw-bold" id="modal_title">Tambah Sub Kegiatan</h2>
+                    <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                        <i class="ki-outline ki-cross fs-1"></i>
+                    </div>
+                </div>
+                <div class="modal-body py-10 px-lg-17">
+                    <div class="fv-row mb-7">
+                        <label class="required fs-6 fw-semibold mb-2">Pilih Urusan</label>
+                        <select name="refurusan_id" id="refurusan_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih Urusan..." data-dropdown-parent="#modal_subkegiatan" required>
+                            <option></option>
+                            @foreach($urusans as $u)
+                                <option value="{{ $u->urusan_id }}">{{ $u->kode_urusan }} - {{ $u->nama_urusan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="fv-row mb-7">
+                        <label class="required fs-6 fw-semibold mb-2">Pilih Bidang</label>
+                        <select name="refbidang_id" id="refbidang_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih Bidang..." data-dropdown-parent="#modal_subkegiatan" required disabled>
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="fv-row mb-7">
+                        <label class="required fs-6 fw-semibold mb-2">Pilih Program</label>
+                        <select name="refprogram_id" id="refprogram_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih Program..." data-dropdown-parent="#modal_subkegiatan" required disabled>
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="fv-row mb-7">
+                        <label class="required fs-6 fw-semibold mb-2">Pilih Kegiatan</label>
+                        <select name="refkegiatan_id" id="refkegiatan_id" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih Kegiatan..." data-dropdown-parent="#modal_subkegiatan" required disabled>
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="fv-row mb-7">
+                        <label class="required fs-6 fw-semibold mb-2">Kode Sub Kegiatan</label>
+                        <input type="text" class="form-control form-control-solid" name="kode_subkegiatan" id="kode_subkegiatan" required />
+                    </div>
+                    <div class="fv-row mb-7">
+                        <label class="required fs-6 fw-semibold mb-2">Nama Sub Kegiatan</label>
+                        <input type="text" class="form-control form-control-solid" name="nama_subkegiatan" id="nama_subkegiatan" required />
+                    </div>
+                    <div class="fv-row mb-7">
+                        <div class="d-flex flex-stack">
+                            <div class="me-5">
+                                <label class="fs-6 fw-semibold">Status Aktif</label>
+                            </div>
+                            <label class="form-check form-switch form-check-custom form-check-solid">
+                                <input class="form-check-input" type="checkbox" name="is_aktif" id="is_aktif" checked="checked" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer flex-center">
+                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary" id="btn_submit">
+                        <span class="indicator-label">Simpan</span>
+                        <span class="indicator-progress">Mohon tunggu... 
+                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
+
+@push('scripts')
+<script>
+    var table;
+    $(function () {
+        table = $('#kt_table_subkegiatan').DataTable({
+            processing: true, serverSide: true,
+            ajax: "{{ route('sakip.subkegiatan.index') }}",
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
+                {data: 'nama_kegiatan', name: 'nama_kegiatan'},
+                {data: 'kode_subkegiatan', name: 'kode_subkegiatan'},
+                {data: 'nama_subkegiatan', name: 'nama_subkegiatan'},
+                {data: 'subkegiatan_isaktif', name: 'subkegiatan_isaktif'},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+            ]
+        });
+
+        $('[data-kt-user-table-filter="search"]').on('keyup', function() {
+            table.search($(this).val()).draw();
+        });
+
+        // Dependent Dropdown: Urusan -> Bidang
+        $('#refurusan_id').on('change', function() {
+            const urusanId = $(this).val();
+            const bidangSelect = $('#refbidang_id');
+            const programSelect = $('#refprogram_id');
+            const kegiatanSelect = $('#refkegiatan_id');
+            
+            bidangSelect.html('<option></option>').prop('disabled', true);
+            programSelect.html('<option></option>').prop('disabled', true);
+            kegiatanSelect.html('<option></option>').prop('disabled', true);
+            
+            if (urusanId) {
+                $.get("{{ url('/admin/sakip/bidang/get-by-urusan') }}/" + urusanId, function(res) {
+                    let options = '<option></option>';
+                    res.forEach(item => {
+                        options += `<option value="${item.refbidang_id}">${item.kode_bidang} - ${item.nama_bidang}</option>`;
+                    });
+                    bidangSelect.html(options).prop('disabled', false);
+                    
+                    const currentBidangId = bidangSelect.data('current-id');
+                    if (currentBidangId) {
+                        bidangSelect.val(currentBidangId).trigger('change');
+                        bidangSelect.data('current-id', '');
+                    }
+                });
+            }
+        });
+
+        // Dependent Dropdown: Bidang -> Program
+        $('#refbidang_id').on('change', function() {
+            const bidangId = $(this).val();
+            const programSelect = $('#refprogram_id');
+            const kegiatanSelect = $('#refkegiatan_id');
+            
+            programSelect.html('<option></option>').prop('disabled', true);
+            kegiatanSelect.html('<option></option>').prop('disabled', true);
+            
+            if (bidangId) {
+                $.get("{{ url('/admin/sakip/program/get-by-bidang') }}/" + bidangId, function(res) {
+                    let options = '<option></option>';
+                    res.forEach(item => {
+                        options += `<option value="${item.refprogram_id}">${item.kode_program} - ${item.nama_program}</option>`;
+                    });
+                    programSelect.html(options).prop('disabled', false);
+                    
+                    const currentProgramId = programSelect.data('current-id');
+                    if (currentProgramId) {
+                        programSelect.val(currentProgramId).trigger('change');
+                        programSelect.data('current-id', '');
+                    }
+                });
+            }
+        });
+
+        // Dependent Dropdown: Program -> Kegiatan
+        $('#refprogram_id').on('change', function() {
+            const programId = $(this).val();
+            const kegiatanSelect = $('#refkegiatan_id');
+            
+            kegiatanSelect.html('<option></option>').prop('disabled', true);
+            
+            if (programId) {
+                $.get("{{ url('/admin/sakip/kegiatan/get-by-program') }}/" + programId, function(res) {
+                    let options = '<option></option>';
+                    res.forEach(item => {
+                        options += `<option value="${item.refkegiatan_id}">${item.kode_kegiatan} - ${item.nama_kegiatan}</option>`;
+                    });
+                    kegiatanSelect.html(options).prop('disabled', false);
+                    
+                    const currentKegiatanId = kegiatanSelect.data('current-id');
+                    if (currentKegiatanId) {
+                        kegiatanSelect.val(currentKegiatanId).trigger('change');
+                        kegiatanSelect.data('current-id', '');
+                    }
+                });
+            }
+        });
+
+        $('#form_subkegiatan').submit(function (e) {
+            e.preventDefault();
+            const btn = $('#btn_submit');
+            btn.attr('data-kt-indicator', 'on').prop('disabled', true);
+            $.ajax({
+                url: "{{ route('sakip.subkegiatan.store') }}",
+                type: "POST", data: $(this).serialize(),
+                success: function (res) {
+                    hideLoader();
+                    $('#modal_subkegiatan').modal('hide'); table.ajax.reload();
+                    Swal.fire({ text: res.success, icon: "success", buttonsStyling: false, confirmButtonText: "Ok", customClass: { confirmButton: "btn btn-primary" } });
+                },
+                error: function() {
+                    hideLoader();
+                    Swal.fire({ text: "Terjadi kesalahan sistem.", icon: "error", buttonsStyling: false, confirmButtonText: "Ok", customClass: { confirmButton: "btn btn-danger" } });
+                }
+            });
+        });
+    });
+
+    function addData() {
+        $('#form_subkegiatan')[0].reset(); $('#subkegiatan_id').val(''); $('#refkegiatan_id').val('').trigger('change');
+        $('#modal_title').text('Tambah Sub Kegiatan'); $('#modal_subkegiatan').modal('show');
+    }
+
+    function editData(id) {
+        $.get("{{ url('/admin/sakip/subkegiatan') }}/" + id + "/edit", function (data) {
+            $('#subkegiatan_id').val(data.refsubkegiatan_id);
+            $('#kode_subkegiatan').val(data.kode_subkegiatan);
+            $('#nama_subkegiatan').val(data.nama_subkegiatan);
+            
+            // Set current IDs for cascading trigger
+            $('#refbidang_id').data('current-id', data.refbidang_id);
+            $('#refprogram_id').data('current-id', data.refprogram_id);
+            $('#refkegiatan_id').data('current-id', data.refkegiatan_id);
+            
+            $('#refurusan_id').val(data.refurusan_id).trigger('change');
+            $('#is_aktif').prop('checked', data.subkegiatan_isaktif == 'T');
+            $('#modal_title').text('Edit Sub Kegiatan'); $('#modal_subkegiatan').modal('show');
+        });
+    }
+
+    function deleteData(id) {
+        Swal.fire({
+            text: "Apakah Anda yakin ingin menghapus data ini?",
+            icon: "warning",
+            showCancelButton: true,
+            buttonsStyling: false,
+            confirmButtonText: "Ya, Hapus!",
+            cancelButtonText: "Tidak, Batal",
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                return $.ajax({
+                    url: "{{ url('/admin/sakip/subkegiatan') }}/" + id,
+                    type: "DELETE",
+                    data: { _token: "{{ csrf_token() }}" }
+                });
+            },
+            allowOutsideClick: () => !Swal.isLoading(),
+            customClass: {
+                confirmButton: "btn fw-bold btn-danger",
+                cancelButton: "btn fw-bold btn-active-light-primary"
+            }
+        }).then(function (result) {
+            if (result.value) {
+                table.ajax.reload();
+                Swal.fire({
+                    text: result.value.success,
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, mengerti!",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary",
+                    }
+                });
+            }
+        });
+    }
+</script>
+@endpush

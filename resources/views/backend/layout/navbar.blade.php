@@ -4,9 +4,9 @@
 									<!--begin::Tablet and mobile search toggle-->
 									<div data-kt-search-element="toggle" class="search-toggle-mobile d-flex d-lg-none align-items-center">
 										<div class="d-flex btn btn-icon btn-color-gray-700 btn-active-color-primary btn-outline btn-active-bg-light w-30px h-30px w-lg-40px h-lg-40px">
-											<i class="ki-duotone ki-magnifier fs-1 text-gray-700 fs-2">
-												<span class="path1"></span>
-												<span class="path2"></span>
+											<i class="ki-outline ki-magnifier fs-1 text-gray-700 fs-2">
+												
+												
 											</i>
 										</div>
 									</div>
@@ -17,9 +17,9 @@
 										<input type="hidden" />
 										<!--end::Hidden input-->
 										<!--begin::Icon-->
-										<i class="ki-duotone ki-magnifier fs-2 text-gray-700 position-absolute top-50 translate-middle-y ms-4">
-											<span class="path1"></span>
-											<span class="path2"></span>
+										<i class="ki-outline ki-magnifier fs-2 text-gray-700 position-absolute top-50 translate-middle-y ms-4">
+											
+											
 										</i>
 										<!--end::Icon-->
 										<!--begin::Input-->
@@ -32,9 +32,9 @@
 										<!--end::Spinner-->
 										<!--begin::Reset-->
 										<span class="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-4" data-kt-search-element="clear">
-											<i class="ki-duotone ki-cross fs-2 fs-lg-1 me-0">
-												<span class="path1"></span>
-												<span class="path2"></span>
+											<i class="ki-outline ki-cross fs-2 fs-lg-1 me-0">
+												
+												
 											</i>
 										</span>
 										<!--end::Reset-->
@@ -222,12 +222,12 @@
 														<!--begin::Symbol-->
 														<div class="symbol symbol-40px me-4">
 															<span class="symbol-label bg-light">
-																<i class="ki-duotone ki-notepad fs-2 text-primary">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
-																	<span class="path3"></span>
-																	<span class="path4"></span>
-																	<span class="path5"></span>
+																<i class="ki-outline ki-notepad fs-2 text-primary">
+																	
+																	
+																	
+																	
+																	
 																</i>
 															</span>
 														</div>
@@ -245,11 +245,11 @@
 														<!--begin::Symbol-->
 														<div class="symbol symbol-40px me-4">
 															<span class="symbol-label bg-light">
-																<i class="ki-duotone ki-frame fs-2 text-primary">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
-																	<span class="path3"></span>
-																	<span class="path4"></span>
+																<i class="ki-outline ki-frame fs-2 text-primary">
+																	
+																	
+																	
+																	
 																</i>
 															</span>
 														</div>
@@ -267,10 +267,10 @@
 														<!--begin::Symbol-->
 														<div class="symbol symbol-40px me-4">
 															<span class="symbol-label bg-light">
-																<i class="ki-duotone ki-message-text-2 fs-2 text-primary">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
-																	<span class="path3"></span>
+																<i class="ki-outline ki-message-text-2 fs-2 text-primary">
+																	
+																	
+																	
 																</i>
 															</span>
 														</div>
@@ -288,10 +288,10 @@
 														<!--begin::Symbol-->
 														<div class="symbol symbol-40px me-4">
 															<span class="symbol-label bg-light">
-																<i class="ki-duotone ki-profile-circle fs-2 text-primary">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
-																	<span class="path3"></span>
+																<i class="ki-outline ki-profile-circle fs-2 text-primary">
+																	
+																	
+																	
 																</i>
 															</span>
 														</div>
@@ -319,15 +319,15 @@
 													<div class="d-flex" data-kt-search-element="toolbar">
 														<!--begin::Preferences toggle-->
 														<div data-kt-search-element="preferences-show" class="btn btn-icon w-20px btn-sm btn-active-color-primary me-2 data-bs-toggle=" title="Show search preferences">
-															<i class="ki-duotone ki-setting-2 fs-2">
-																<span class="path1"></span>
-																<span class="path2"></span>
+															<i class="ki-outline ki-setting-2 fs-2">
+																
+																
 															</i>
 														</div>
 														<!--end::Preferences toggle-->
 														<!--begin::Advanced search toggle-->
 														<div data-kt-search-element="advanced-options-form-show" class="btn btn-icon w-20px btn-sm btn-active-color-primary me-n1" data-bs-toggle="tooltip" title="Show more search options">
-															<i class="ki-duotone ki-down fs-2"></i>
+															<i class="ki-outline ki-down fs-2"></i>
 														</div>
 														<!--end::Advanced search toggle-->
 													</div>
@@ -341,9 +341,9 @@
 														<!--begin::Symbol-->
 														<div class="symbol symbol-40px me-4">
 															<span class="symbol-label bg-light">
-																<i class="ki-duotone ki-laptop fs-2 text-primary">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
+																<i class="ki-outline ki-laptop fs-2 text-primary">
+																	
+																	
 																</i>
 															</span>
 														</div>
@@ -361,11 +361,11 @@
 														<!--begin::Symbol-->
 														<div class="symbol symbol-40px me-4">
 															<span class="symbol-label bg-light">
-																<i class="ki-duotone ki-chart-simple fs-2 text-primary">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
-																	<span class="path3"></span>
-																	<span class="path4"></span>
+																<i class="ki-outline ki-chart-simple fs-2 text-primary">
+																	
+																	
+																	
+																	
 																</i>
 															</span>
 														</div>
@@ -383,9 +383,9 @@
 														<!--begin::Symbol-->
 														<div class="symbol symbol-40px me-4">
 															<span class="symbol-label bg-light">
-																<i class="ki-duotone ki-chart fs-2 text-primary">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
+																<i class="ki-outline ki-chart fs-2 text-primary">
+																	
+																	
 																</i>
 															</span>
 														</div>
@@ -403,9 +403,9 @@
 														<!--begin::Symbol-->
 														<div class="symbol symbol-40px me-4">
 															<span class="symbol-label bg-light">
-																<i class="ki-duotone ki-chart-line-down fs-2 text-primary">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
+																<i class="ki-outline ki-chart-line-down fs-2 text-primary">
+																	
+																	
 																</i>
 															</span>
 														</div>
@@ -423,9 +423,9 @@
 														<!--begin::Symbol-->
 														<div class="symbol symbol-40px me-4">
 															<span class="symbol-label bg-light">
-																<i class="ki-duotone ki-sms fs-2 text-primary">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
+																<i class="ki-outline ki-sms fs-2 text-primary">
+																	
+																	
 																</i>
 															</span>
 														</div>
@@ -443,9 +443,9 @@
 														<!--begin::Symbol-->
 														<div class="symbol symbol-40px me-4">
 															<span class="symbol-label bg-light">
-																<i class="ki-duotone ki-bank fs-2 text-primary">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
+																<i class="ki-outline ki-bank fs-2 text-primary">
+																	
+																	
 																</i>
 															</span>
 														</div>
@@ -463,9 +463,9 @@
 														<!--begin::Symbol-->
 														<div class="symbol symbol-40px me-4">
 															<span class="symbol-label bg-light">
-																<i class="ki-duotone ki-chart-line-down fs-2 text-primary">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
+																<i class="ki-outline ki-chart-line-down fs-2 text-primary">
+																	
+																	
 																</i>
 															</span>
 														</div>
@@ -486,10 +486,10 @@
 											<div data-kt-search-element="empty" class="text-center d-none">
 												<!--begin::Icon-->
 												<div class="pt-10 pb-10">
-													<i class="ki-duotone ki-search-list fs-4x opacity-50">
-														<span class="path1"></span>
-														<span class="path2"></span>
-														<span class="path3"></span>
+													<i class="ki-outline ki-search-list fs-4x opacity-50">
+														
+														
+														
 													</i>
 												</div>
 												<!--end::Icon-->
@@ -673,11 +673,11 @@
 								<div class="d-flex align-items-center ms-3 ms-lg-4">
 									<!--begin::Drawer toggle-->
 									<div class="btn btn-icon btn-color-gray-700 btn-active-color-primary btn-outline btn-active-bg-light w-30px h-30px w-lg-40px h-lg-40px" id="kt_activities_toggle">
-										<i class="ki-duotone ki-chart-simple fs-1">
-											<span class="path1"></span>
-											<span class="path2"></span>
-											<span class="path3"></span>
-											<span class="path4"></span>
+										<i class="ki-outline ki-chart-simple fs-1">
+											
+											
+											
+											
 										</i>
 									</div>
 									<!--end::Drawer toggle-->
@@ -687,21 +687,21 @@
 								<div class="d-flex align-items-center ms-3 ms-lg-4">
 									<!--begin::Menu toggle-->
 									<a href="#" class="btn btn-icon btn-color-gray-700 btn-active-color-primary btn-outline btn-active-bg-light w-30px h-30px w-lg-40px h-lg-40px" data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-										<i class="ki-duotone ki-night-day theme-light-show fs-1">
-											<span class="path1"></span>
-											<span class="path2"></span>
-											<span class="path3"></span>
-											<span class="path4"></span>
-											<span class="path5"></span>
-											<span class="path6"></span>
-											<span class="path7"></span>
-											<span class="path8"></span>
-											<span class="path9"></span>
-											<span class="path10"></span>
+										<i class="ki-outline ki-night-day theme-light-show fs-1">
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
 										</i>
-										<i class="ki-duotone ki-moon theme-dark-show fs-1">
-											<span class="path1"></span>
-											<span class="path2"></span>
+										<i class="ki-outline ki-moon theme-dark-show fs-1">
+											
+											
 										</i>
 									</a>
 									<!--begin::Menu toggle-->
@@ -711,17 +711,17 @@
 										<div class="menu-item px-3 my-0">
 											<a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="light">
 												<span class="menu-icon" data-kt-element="icon">
-													<i class="ki-duotone ki-night-day fs-2">
-														<span class="path1"></span>
-														<span class="path2"></span>
-														<span class="path3"></span>
-														<span class="path4"></span>
-														<span class="path5"></span>
-														<span class="path6"></span>
-														<span class="path7"></span>
-														<span class="path8"></span>
-														<span class="path9"></span>
-														<span class="path10"></span>
+													<i class="ki-outline ki-night-day fs-2">
+														
+														
+														
+														
+														
+														
+														
+														
+														
+														
 													</i>
 												</span>
 												<span class="menu-title">Light</span>
@@ -732,9 +732,9 @@
 										<div class="menu-item px-3 my-0">
 											<a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="dark">
 												<span class="menu-icon" data-kt-element="icon">
-													<i class="ki-duotone ki-moon fs-2">
-														<span class="path1"></span>
-														<span class="path2"></span>
+													<i class="ki-outline ki-moon fs-2">
+														
+														
 													</i>
 												</span>
 												<span class="menu-title">Dark</span>
@@ -745,11 +745,11 @@
 										<div class="menu-item px-3 my-0">
 											<a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="system">
 												<span class="menu-icon" data-kt-element="icon">
-													<i class="ki-duotone ki-screen fs-2">
-														<span class="path1"></span>
-														<span class="path2"></span>
-														<span class="path3"></span>
-														<span class="path4"></span>
+													<i class="ki-outline ki-screen fs-2">
+														
+														
+														
+														
 													</i>
 												</span>
 												<span class="menu-title">System</span>
@@ -765,9 +765,9 @@
 									<!--begin::Menu- wrapper-->
 									<!--begin::User icon(remove this button to use user avatar as menu toggle)-->
 									<div class="btn btn-icon btn-color-gray-700 btn-active-color-primary btn-outline btn-active-bg-light w-30px h-30px w-lg-40px h-lg-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-										<i class="ki-duotone ki-user fs-1">
-											<span class="path1"></span>
-											<span class="path2"></span>
+										<i class="ki-outline ki-user fs-1">
+											
+											
 										</i>
 									</div>
 									<!--end::User icon-->
@@ -840,10 +840,10 @@
 												<div class="menu-item px-3">
 													<a href="account/statements.html" class="menu-link d-flex flex-stack px-5">Statements 
 													<span class="ms-2 lh-0" data-bs-toggle="tooltip" title="View your statements">
-														<i class="ki-duotone ki-information-5 fs-5">
-															<span class="path1"></span>
-															<span class="path2"></span>
-															<span class="path3"></span>
+														<i class="ki-outline ki-information-5 fs-5">
+															
+															
+															
 														</i>
 													</span></a>
 												</div>

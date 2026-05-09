@@ -130,9 +130,9 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="Modal_Tambah_Data" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade modal-right" id="Modal_Tambah_Data" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered mw-850px">
+        <div class="modal-dialog">
             <div class="modal-content " id="tambah-modal-content">
                 <div class="modal-header border-gray-300" id="kt_modal_add_role_header">
                     <h2 class="fw-bold">Add Role</h2>
@@ -191,9 +191,9 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="Modal_Edit_Data" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade modal-right" id="Modal_Edit_Data" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered mw-850px">
+        <div class="modal-dialog">
             <div class="modal-content" id="edit-modal-content">
                 <div class="modal-header border-gray-300" id="kt_modal_edit_role_header">
                     <h2 class="fw-bold">Edit Role</h2>
@@ -226,9 +226,9 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="Modal_Hapus_Data" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade modal-right" id="Modal_Hapus_Data" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog">
             <div class="modal-content" id="hapus-modal-content">
                 <div class="modal-header border-gray-300">
                     <h2 class="fw-bold">Delete Role</h2>
@@ -251,8 +251,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="Modal_Show_Data" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered mw-850px">
+    <div class="modal fade modal-right" id="Modal_Show_Data" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header border-gray-300">
                     <h2 class="fw-bold">Detail Role</h2>

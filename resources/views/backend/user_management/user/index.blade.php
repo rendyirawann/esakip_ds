@@ -170,8 +170,8 @@
     </div>
 
     @can('user.create')
-        <div class="modal fade" id="Modal_Tambah_Data" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered mw-750px">
+        <div class="modal fade modal-right" id="Modal_Tambah_Data" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content" id="tambah-modal-content">
                     <div class="modal-header border-gray-300" id="kt_modal_add_user_header">
                         <h2 class="fw-bold">Add User</h2>
@@ -292,9 +292,9 @@
         </div>
     @endcan
     @can('user.edit')
-        <div class="modal fade" id="Modal_Edit_Data" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        <div class="modal fade modal-right" id="Modal_Edit_Data" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered mw-750px">
+            <div class="modal-dialog">
                 <div class="modal-content" id="edit-modal-content">
                     <div class="modal-header border-gray-300" id="kt_modal_edit_user_header">
                         <h2 class="fw-bold">Edit User</h2>
@@ -329,9 +329,9 @@
         </div>
     @endcan
     @can('user.delete')
-        <div class="modal fade" id="Modal_Hapus_Data" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        <div class="modal fade modal-right" id="Modal_Hapus_Data" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog">
                 <div class="modal-content" id="hapus-modal-content">
                     <div class="modal-header border-gray-300">
                         <h2 class="modal-title">Delete User</h2>
@@ -355,8 +355,8 @@
         </div>
     @endcan
     @can('user.ban')
-        <div class="modal fade" id="ModalBanUser" tabindex="-1" aria-labelledby="ModalBanUserLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+        <div class="modal fade modal-right" id="ModalBanUser" tabindex="-1" aria-labelledby="ModalBanUserLabel" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header border-gray-300">
                         <h3 class="modal-title" id="ModalBanUserLabel">Ban User</h3>
@@ -388,8 +388,8 @@
     @endcan
 
     @can('user.show')
-        <div class="modal fade" id="Modal_Show_Data" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered mw-950px">
+        <div class="modal fade modal-right" id="Modal_Show_Data" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header border-gray-300">
                         <h2 class="fw-bold">Detail User</h2>
