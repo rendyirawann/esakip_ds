@@ -202,7 +202,16 @@ Route::prefix('frontend')->name('frontend.')->group(function () {
             
             // Sasaran Renstra
             Route::resource('sasaran', \App\Http\Controllers\Frontend\Renstra\SasaranRenstraController::class);
-            Route::get('get-sasaran-rpjmd/{periode_id}', [\App\Http\Controllers\Frontend\Renstra\SasaranRenstraController::class, 'getSasaranRpjmd'])->name('sasaran.get-rpjmd');
+            Route::get('sasaran/get-sasaran-rpjmd/{periode_id}', [\App\Http\Controllers\Frontend\Renstra\SasaranRenstraController::class, 'getSasaranRpjmd'])->name('sasaran.get-rpjmd');
+            Route::get('sasaran/get-tujuan-renstra/{skpd_id}', [\App\Http\Controllers\Frontend\Renstra\SasaranRenstraController::class, 'getTujuanRenstra'])->name('sasaran.get-tujuan-renstra');
+            Route::post('sasaran/link-tujuan/{id}', [\App\Http\Controllers\Frontend\Renstra\SasaranRenstraController::class, 'linkTujuanPost'])->name('sasaran.link-tujuan-post');
+            
+            // Indikator Routes
+            Route::get('sasaran/{sasaran_id}/indikators', [\App\Http\Controllers\Frontend\Renstra\SasaranRenstraController::class, 'getIndikators'])->name('sasaran.get-indikators');
+            Route::post('sasaran/indikator/store', [\App\Http\Controllers\Frontend\Renstra\SasaranRenstraController::class, 'storeIndikator'])->name('sasaran.indikator.store');
+            Route::get('sasaran/indikator/{id}/edit', [\App\Http\Controllers\Frontend\Renstra\SasaranRenstraController::class, 'editIndikator'])->name('sasaran.indikator.edit');
+            Route::put('sasaran/indikator/{id}', [\App\Http\Controllers\Frontend\Renstra\SasaranRenstraController::class, 'updateIndikator'])->name('sasaran.indikator.update');
+            Route::delete('sasaran/indikator/{id}', [\App\Http\Controllers\Frontend\Renstra\SasaranRenstraController::class, 'deleteIndikator'])->name('sasaran.indikator.destroy');
         });
         
         // Add more frontend routes here
