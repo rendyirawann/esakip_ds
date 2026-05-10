@@ -31,4 +31,9 @@ class SakipSasaran extends Model
         return $this->belongsTo(SakipMisi::class, 'refmisi_id', 'refmisi_id');
     }
 
+    public function tujuanRpjmd()
+    {
+        return $this->belongsTo(SakipTujuan::class, 'reftujuan_id', 'reftujuan_id');
+    }
+
 }

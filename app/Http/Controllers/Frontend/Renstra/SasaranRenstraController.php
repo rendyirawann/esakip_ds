@@ -10,6 +10,7 @@ use App\Models\SakipPeriode;
 use App\Models\SakipSkpd;
 use App\Models\SakipVisi;
 use App\Models\SakipMisi;
+use App\Models\SakipTujuan;
 use App\Models\SakipTujuanrenstra;
 use App\Models\SakipIndikatorsasaranrenstra;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,6 @@ class SasaranRenstraController extends Controller
         $user = Auth::guard('frontend')->user();
         $isSuperadmin = $user->hasRole(['Superadmin', 'superadmin']);
 
-        // SKPD Detection
         $skpd_id = null;
         if (!$isSuperadmin) {
             $skpd_id = $user->refskpd_id ?? null;
@@ -39,7 +39,8 @@ class SasaranRenstraController extends Controller
         }
 
         if ($request->ajax()) {
-            $query = SakipSasaranrenstra::with(['sasaranRpjmd', 'periode', 'skpd', 'tujuanRenstra']);
+            // Eager load everything needed
+            $query = SakipSasaranrenstra::with(['sasaranRpjmd', 'periode', 'skpd', 'tujuanRpjmd', 'linkedTujuanRenstra']);
             
             if ($skpd_id) {
                 $query->where('refskpd_id', $skpd_id);
@@ -55,10 +56,19 @@ class SasaranRenstraController extends Controller
                     return $row->skpd->nama_skpd ?? '-';
                 })
                 ->addColumn('sasaran_rpjmd', function($row) {
-                    return $row->sasaranRpjmd->uraian_sasaran ?? '-';
+                    return strip_tags($row->sasaranRpjmd->uraian_sasaran ?? '-');
                 })
                 ->addColumn('tujuan_renstra', function($row) {
-                    return $row->tujuanRenstra->uraian_tujuanrenstra ?? '-';
+                    $html = '<div class="d-flex flex-column">';
+                    $html .= '<span class="text-gray-800 fw-bold mb-1"><span class="badge badge-light-primary me-2">RPJMD</span>' . strip_tags($row->tujuanRpjmd->uraian_tujuan ?? '-') . '</span>';
+                    
+                    if ($row->linkedTujuanRenstra) {
+                        $html .= '<span class="text-gray-600 fs-7"><i class="ki-outline ki-cloud-change fs-6 text-success me-1"></i>' . strip_tags($row->linkedTujuanRenstra->uraian_tujuanrenstra) . '</span>';
+                    } else {
+                        $html .= '<span class="text-muted fs-7 italic">Belum ditautkan ke Tujuan Renstra</span>';
+                    }
+                    $html .= '</div>';
+                    return $html;
                 })
                 ->addColumn('action', function($row) {
                     return '
@@ -88,33 +98,32 @@ class SasaranRenstraController extends Controller
         $skpds = $isSuperadmin ? SakipSkpd::orderBy('nama_skpd')->get() : null;
         $current_skpd = $skpd_id ? SakipSkpd::find($skpd_id) : null;
 
-        $tujuan_renstras = [];
-        if ($skpd_id) {
-            $tujuan_renstras = SakipTujuanrenstra::where('refskpd_id', $skpd_id)->get();
-        }
-
-        return view('frontend.renstra.sasaran.index', compact('periodes', 'skpds', 'isSuperadmin', 'current_skpd', 'tujuan_renstras'));
+        return view('frontend.renstra.sasaran.index', compact('periodes', 'skpds', 'isSuperadmin', 'current_skpd'));
     }
 
-    public function getTujuanRenstra($skpd_id)
+    public function show($id)
     {
-        $tujuan = SakipTujuanrenstra::where('refskpd_id', $skpd_id)->get();
-        return response()->json($tujuan);
+        $sasaran = SakipSasaranrenstra::with(['skpd', 'periode', 'tujuanRpjmd', 'sasaranRpjmd', 'tujuanRenstra'])->findOrFail($id);
+        return response()->json($sasaran);
+    }
+
+    public function edit($id)
+    {
+        $sasaran = SakipSasaranrenstra::with(['skpd', 'periode', 'tujuanRpjmd'])->findOrFail($id);
+        return response()->json($sasaran);
     }
 
     public function store(Request $request)
     {
         $request->validate([
+            'uraian_sasaranrenstra' => 'required|string',
+            'refskpd_id' => 'required',
             'refperiode_id' => 'required',
             'refsasaran_id' => 'required',
-            'refskpd_id' => 'required',
-            'uraian_sasaranrenstra' => 'required',
         ]);
 
-        // Get Visi/Misi from Sasaran RPJMD
         $sasaranRpjmd = SakipSasaran::find($request->refsasaran_id);
-
-        $data = $request->except('id');
+        $data = $request->all();
         $data['refvisi_id'] = $sasaranRpjmd->refvisi_id ?? null;
         $data['refmisi_id'] = $sasaranRpjmd->refmisi_id ?? null;
         $data['reftujuan_id'] = $sasaranRpjmd->reftujuan_id ?? null;
@@ -122,27 +131,7 @@ class SasaranRenstraController extends Controller
 
         SakipSasaranrenstra::create($data);
 
-        return response()->json(['success' => 'Data Sasaran Renstra berhasil ditambahkan.']);
-    }
-
-    public function show($id)
-    {
-        $sasaran = SakipSasaranrenstra::with(['skpd', 'periode', 'sasaranRpjmd'])->findOrFail($id);
-        if (request()->ajax()) {
-            return response()->json($sasaran);
-        }
-        return view('frontend.renstra.sasaran.show', compact('sasaran'));
-    }
-
-    public function edit($id)
-    {
-        $sasaran = SakipSasaranrenstra::findOrFail($id);
-        if (request()->ajax()) {
-            return response()->json($sasaran);
-        }
-        $periodes = SakipPeriode::orderBy('periode', 'desc')->get();
-        $sasaran_rpjmds = SakipSasaran::where('refperiode_id', $sasaran->refperiode_id)->get();
-        return view('frontend.renstra.sasaran.edit', compact('sasaran', 'periodes', 'sasaran_rpjmds'));
+        return response()->json(['success' => 'Data Sasaran Renstra berhasil disimpan.']);
     }
 
     public function update(Request $request, $id)
@@ -186,6 +175,14 @@ class SasaranRenstraController extends Controller
     public function getSasaranRpjmd($periode_id)
     {
         $data = SakipSasaran::where('refperiode_id', $periode_id)->where('sasaran_isaktif', 'T')->get();
+        return response()->json($data);
+    }
+
+    public function getTujuanRenstra($skpd_id, $periode_id)
+    {
+        $data = SakipTujuanrenstra::where('refskpd_id', $skpd_id)
+                                 ->where('refperiode_id', $periode_id)
+                                 ->get();
         return response()->json($data);
     }
 

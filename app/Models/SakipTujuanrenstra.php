@@ -31,4 +31,19 @@ class SakipTujuanrenstra extends Model
         return $this->belongsTo(SakipPeriode::class, 'refperiode_id', 'refperiode_id');
     }
 
+    public function tujuanRpjmd()
+    {
+        return $this->belongsTo(SakipTujuan::class, 'reftujuan_id', 'reftujuan_id');
+    }
+
+    public function sasaranRpjmd()
+    {
+        return $this->belongsTo(SakipSasaran::class, 'refsasaran_id', 'refsasaran_id');
+    }
+
+    public function sasaranRenstra()
+    {
+        return $this->belongsTo(SakipSasaranrenstra::class, 'refsasaranrenstra_id', 'refsasaranrenstra_id');
+    }
+
 }

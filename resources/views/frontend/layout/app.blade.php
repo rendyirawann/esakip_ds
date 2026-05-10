@@ -14,6 +14,7 @@
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:site_name" content="{{ $appSettings['site_name'] ?? 'StarterTemp' }}" />
     <link rel="canonical" href="{{ url()->current() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @php
         $siteLogo = $appSettings['site_logo'] ?? 'base-logo.png';
         $siteFont = $appSettings['site_font'] ?? 'Plus Jakarta Sans';
