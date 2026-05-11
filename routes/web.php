@@ -231,6 +231,10 @@ Route::prefix('frontend')->name('frontend.')->group(function () {
 
             // Formulasi Renstra
             Route::resource('formulasi', \App\Http\Controllers\Frontend\Renstra\FormulasiRenstraController::class);
+
+            // Cascading Program
+            Route::get('cascadingprogram/list-data', [\App\Http\Controllers\Frontend\Renstra\CascadingProgramController::class, 'index'])->name('cascadingprogram.data');
+            Route::resource('cascadingprogram', \App\Http\Controllers\Frontend\Renstra\CascadingProgramController::class);
         });
         
         // Add more frontend routes here

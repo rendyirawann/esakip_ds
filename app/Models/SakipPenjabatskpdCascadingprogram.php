@@ -36,4 +36,8 @@ class SakipPenjabatskpdCascadingprogram extends Model
         return $this->belongsTo(SakipProgram::class, 'refprogram_id', 'refprogram_id');
     }
 
+    public function penjabatMaster()
+    {
+        return $this->belongsTo(SakipPenjabatSkpd::class, 'refpenjabatskpd_id', 'refpenjabatskpd_id');
+    }
 }

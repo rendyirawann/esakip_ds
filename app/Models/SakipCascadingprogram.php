@@ -41,4 +41,18 @@ class SakipCascadingprogram extends Model
         return $this->belongsTo(SakipPeriode::class, 'refperiode_id', 'refperiode_id');
     }
 
+    public function sasaranRenstra()
+    {
+        return $this->belongsTo(SakipSasaranrenstra::class, 'refsasaranrenstra_id', 'refsasaranrenstra_id');
+    }
+
+    public function tujuanRpjmd()
+    {
+        return $this->belongsTo(SakipTujuan::class, 'reftujuan_id', 'reftujuan_id');
+    }
+
+    public function penjabat()
+    {
+        return $this->hasMany(SakipPenjabatskpdCascadingprogram::class, 'refcascadingprogram_id', 'refcascadingprogram_id');
+    }
 }
