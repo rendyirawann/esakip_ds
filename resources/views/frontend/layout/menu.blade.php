@@ -40,8 +40,8 @@
                 <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.renstra.strategi.index') ? 'active' : '' }}" href="{{ route('frontend.renstra.strategi.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Strategi</span></a></div>
                 <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.renstra.kebijakan.index') ? 'active' : '' }}" href="{{ route('frontend.renstra.kebijakan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Kebijakan</span></a></div>
                 <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.renstra.cascadingprogram.index') ? 'active' : '' }}" href="{{ route('frontend.renstra.cascadingprogram.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Program</span></a></div>
-                <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Kegiatan</span></a></div>
-                <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Sub Kegiatan</span></a></div>
+                <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.renstra.cascadingkegiatan.index') ? 'active' : '' }}" href="{{ route('frontend.renstra.cascadingkegiatan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Kegiatan</span></a></div>
+                <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.renstra.cascadingsubkegiatan.index') ? 'active' : '' }}" href="{{ route('frontend.renstra.cascadingsubkegiatan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Sub Kegiatan</span></a></div>
             </div>
         </div>
 

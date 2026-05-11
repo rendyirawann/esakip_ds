@@ -47,6 +47,12 @@ class CascadingProgramController extends Controller
             $query->where('sakip_cascadingprogram.refperiode_id', $periode_id);
         }
 
+        $query->orderBy('refmisi_id')
+            ->orderBy('reftujuan_id')
+            ->orderBy('refsasaran_id')
+            ->orderBy('refprogram_id')
+            ->orderBy('uraian_indikatorprogram');
+
         return DataTables::of($query)
             ->addIndexColumn()
             ->addColumn('misi_text', function($row) {
@@ -165,6 +171,7 @@ class CascadingProgramController extends Controller
             $indikator = new SakipIndikatorcascadingprogram();
             $indikator->refcascadingprogram_id = $model->refcascadingprogram_id;
             $indikator->refsasaranrenstra_id = $model->refsasaranrenstra_id;
+            $indikator->refindikatorsasaranrenstra_id = $model->refindikatorsasaranrenstra_id;
             $indikator->refskpd_id = $model->refskpd_id;
             $indikator->refperiode_id = $model->refperiode_id;
             $indikator->refbidang_id = $model->refbidang_id;
@@ -178,6 +185,7 @@ class CascadingProgramController extends Controller
                 $triwulan->refindikatorprogram_id = $indikator->refindikatorprogram_id;
                 $triwulan->refcascadingprogram_id = $model->refcascadingprogram_id;
                 $triwulan->refsasaranrenstra_id = $model->refsasaranrenstra_id;
+                $triwulan->refindikatorsasaranrenstra_id = $model->refindikatorsasaranrenstra_id;
                 $triwulan->refskpd_id = $model->refskpd_id;
                 $triwulan->refperiode_id = $model->refperiode_id;
                 $triwulan->refbidang_id = $model->refbidang_id;
@@ -217,12 +225,26 @@ class CascadingProgramController extends Controller
 
             // Update associated indicators
             SakipIndikatorcascadingprogram::where('refcascadingprogram_id', $id)->update([
-                'target_rkt' => $model->program_target
+                'refsasaranrenstra_id' => $model->refsasaranrenstra_id,
+                'refindikatorsasaranrenstra_id' => $model->refindikatorsasaranrenstra_id,
+                'refskpd_id' => $model->refskpd_id,
+                'refperiode_id' => $model->refperiode_id,
+                'refbidang_id' => $model->refbidang_id,
+                'refprogram_id' => $model->refprogram_id,
+                'target_rkt' => $model->program_target,
+                'target_pk' => $model->program_target,
             ]);
 
             // Update associated triwulan
             \App\Models\SakipIndikatorcascadingprogramTriwulan::where('refcascadingprogram_id', $id)->update([
-                'triwulan_target_rkt' => $model->program_target
+                'refsasaranrenstra_id' => $model->refsasaranrenstra_id,
+                'refindikatorsasaranrenstra_id' => $model->refindikatorsasaranrenstra_id,
+                'refskpd_id' => $model->refskpd_id,
+                'refperiode_id' => $model->refperiode_id,
+                'refbidang_id' => $model->refbidang_id,
+                'refprogram_id' => $model->refprogram_id,
+                'triwulan_target_rkt' => $model->program_target,
+                'triwulan_target_pk' => $model->program_target,
             ]);
 
             DB::commit();

@@ -257,6 +257,18 @@ Route::prefix('frontend')->name('frontend.')->group(function () {
             Route::get('penjabat-kegiatan/fetch', [\App\Http\Controllers\Frontend\Renstra\PenjabatKegiatanController::class, 'fetchPenjabatskpd'])->name('penjabat-kegiatan.fetch');
             Route::post('penjabat-kegiatan', [\App\Http\Controllers\Frontend\Renstra\PenjabatKegiatanController::class, 'store'])->name('penjabat-kegiatan.store');
             Route::delete('penjabat-kegiatan/{id}', [\App\Http\Controllers\Frontend\Renstra\PenjabatKegiatanController::class, 'destroy'])->name('penjabat-kegiatan.destroy');
+
+            // Cascading Sub Kegiatan
+            Route::get('cascadingsubkegiatan/data', [\App\Http\Controllers\Frontend\Renstra\CascadingSubKegiatanController::class, 'data'])->name('cascadingsubkegiatan.data');
+            Route::get('cascadingsubkegiatan/get-kegiatan-cascading', [\App\Http\Controllers\Frontend\Renstra\CascadingSubKegiatanController::class, 'getKegiatanCascading'])->name('cascadingsubkegiatan.getKegiatanCascading');
+            Route::get('cascadingsubkegiatan/get-associated-values', [\App\Http\Controllers\Frontend\Renstra\CascadingSubKegiatanController::class, 'getAssociatedValues'])->name('cascadingsubkegiatan.getAssociatedValues');
+            Route::get('cascadingsubkegiatan/get-subkegiatans', [\App\Http\Controllers\Frontend\Renstra\CascadingSubKegiatanController::class, 'getSubKegiatans'])->name('cascadingsubkegiatan.getSubKegiatans');
+            Route::resource('cascadingsubkegiatan', \App\Http\Controllers\Frontend\Renstra\CascadingSubKegiatanController::class);
+
+            // Penjabat Sub Kegiatan
+            Route::get('penjabat-subkegiatan/fetch', [\App\Http\Controllers\Frontend\Renstra\PenjabatSubKegiatanController::class, 'fetchPenjabatskpd'])->name('penjabat-subkegiatan.fetch');
+            Route::post('penjabat-subkegiatan', [\App\Http\Controllers\Frontend\Renstra\PenjabatSubKegiatanController::class, 'store'])->name('penjabat-subkegiatan.store');
+            Route::delete('penjabat-subkegiatan/{id}', [\App\Http\Controllers\Frontend\Renstra\PenjabatSubKegiatanController::class, 'destroy'])->name('penjabat-subkegiatan.destroy');
         });
         
         // Add more frontend routes here

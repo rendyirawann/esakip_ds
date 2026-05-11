@@ -41,4 +41,8 @@ class SakipPenjabatskpdCascadingsubkegiatan extends Model
         return $this->belongsTo(SakipSubkegiatan::class, 'refsubkegiatan_id', 'refsubkegiatan_id');
     }
 
+    public function penjabatSkpd()
+    {
+        return $this->belongsTo(SakipPenjabatSkpd::class, 'refpenjabatskpd_id', 'refpenjabatskpd_id');
+    }
 }

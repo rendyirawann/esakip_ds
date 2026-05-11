@@ -145,7 +145,7 @@ class CascadingKegiatanController extends Controller
             DB::statement("SELECT setval(pg_get_serial_sequence('sakip_indikatorcascadingkegiatan_triwulan', 'refindikatorkegiatantriwulan_id'), coalesce(max(refindikatorkegiatantriwulan_id), 0) + 1, false) FROM sakip_indikatorcascadingkegiatan_triwulan");
 
             $model = new SakipCascadingkegiatan();
-            $data = $request->except(['refbidang_id', 'refmisi_id', 'reftujuan_id', 'refsasaran_id']);
+            $data = $request->except(['refcascadingkegiatan_id', 'refbidang_id', 'refmisi_id', 'reftujuan_id', 'refsasaran_id']);
             $model->fill($data);
             
             // Safety Check: Fetch associated IDs from Parent Program if null
@@ -217,12 +217,28 @@ class CascadingKegiatanController extends Controller
 
             // Update associated indicators
             SakipIndikatorcascadingkegiatan::where('refcascadingkegiatan_id', $id)->update([
-                'target_rkt' => $model->kegiatan_target
+                'refcascadingprogram_id' => $model->refcascadingprogram_id,
+                'refsasaranrenstra_id' => $model->refsasaranrenstra_id,
+                'refindikatorsasaranrenstra_id' => $model->refindikatorsasaranrenstra_id,
+                'refskpd_id' => $model->refskpd_id,
+                'refperiode_id' => $model->refperiode_id,
+                'refprogram_id' => $model->refprogram_id,
+                'refkegiatan_id' => $model->refkegiatan_id,
+                'target_rkt' => $model->kegiatan_target,
+                'target_pk' => $model->kegiatan_target,
             ]);
 
             // Update associated triwulan
             SakipIndikatorcascadingkegiatanTriwulan::where('refcascadingkegiatan_id', $id)->update([
-                'triwulan_target_rkt' => $model->kegiatan_target
+                'refcascadingprogram_id' => $model->refcascadingprogram_id,
+                'refsasaranrenstra_id' => $model->refsasaranrenstra_id,
+                'refindikatorsasaranrenstra_id' => $model->refindikatorsasaranrenstra_id,
+                'refskpd_id' => $model->refskpd_id,
+                'refperiode_id' => $model->refperiode_id,
+                'refprogram_id' => $model->refprogram_id,
+                'refkegiatan_id' => $model->refkegiatan_id,
+                'triwulan_target_rkt' => $model->kegiatan_target,
+                'triwulan_target_pk' => $model->kegiatan_target,
             ]);
 
             DB::commit();

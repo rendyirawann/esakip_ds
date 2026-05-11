@@ -203,18 +203,42 @@ class SasaranRenstraController extends Controller
             'indikatorsasaranrenstra_satuan' => 'required',
         ]);
 
-        $sasaran = SakipSasaranrenstra::find($request->refsasaranrenstra_id);
-        
-        $data = $request->except(['id', 'indikator_id']);
-        $data['refskpd_id'] = $sasaran->refskpd_id;
-        $data['refperiode_id'] = $sasaran->refperiode_id;
-        $data['indikatorsasaranrenstra_isaktif'] = $request->indikatorsasaranrenstra_isaktif ?? 'T';
-        $data['iku_isaktif'] = $request->iku_isaktif ?? 'F';
-        $data['pk_isaktif'] = $request->pk_isaktif ?? 'F';
+        \Illuminate\Support\Facades\DB::beginTransaction();
+        try {
+            $sasaran = SakipSasaranrenstra::find($request->refsasaranrenstra_id);
+            
+            // Sync sequences
+            \Illuminate\Support\Facades\DB::statement("SELECT setval(pg_get_serial_sequence('sakip_indikatorsasaranrenstra', 'refindikatorsasaranrenstra_id'), coalesce(max(refindikatorsasaranrenstra_id), 0) + 1, false) FROM sakip_indikatorsasaranrenstra");
+            \Illuminate\Support\Facades\DB::statement("SELECT setval(pg_get_serial_sequence('sakip_indikatorsasaranrenstra_triwulan', 'refindikatorsasaranrenstratriwulan_id'), coalesce(max(refindikatorsasaranrenstratriwulan_id), 0) + 1, false) FROM sakip_indikatorsasaranrenstra_triwulan");
 
-        SakipIndikatorsasaranrenstra::create($data);
+            $data = $request->except(['id', 'indikator_id']);
+            $data['refskpd_id'] = $sasaran->refskpd_id;
+            $data['refperiode_id'] = $sasaran->refperiode_id;
+            $data['indikatorsasaranrenstra_isaktif'] = $request->indikatorsasaranrenstra_isaktif ?? 'T';
+            $data['iku_isaktif'] = $request->iku_isaktif ?? 'F';
+            $data['pk_isaktif'] = $request->pk_isaktif ?? 'F';
 
-        return response()->json(['success' => 'Indikator berhasil disimpan.']);
+            $indikator = SakipIndikatorsasaranrenstra::create($data);
+
+            // Create 4 Triwulan rows
+            for ($i = 1; $i <= 4; $i++) {
+                \App\Models\SakipIndikatorsasaranrenstraTriwulan::create([
+                    'refindikatorsasaranrenstra_id' => $indikator->refindikatorsasaranrenstra_id,
+                    'refsasaranrenstra_id' => $sasaran->refsasaranrenstra_id,
+                    'refskpd_id' => $sasaran->refskpd_id,
+                    'refperiode_id' => $sasaran->refperiode_id,
+                    'reftriwulan_id' => $i,
+                    'triwulan_target_rkt' => $indikator->indikatorsasaranrenstra_target,
+                    'triwulan_target_pk' => $indikator->indikatorsasaranrenstra_target,
+                ]);
+            }
+
+            \Illuminate\Support\Facades\DB::commit();
+            return response()->json(['success' => 'Indikator berhasil disimpan.']);
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function editIndikator($id)
@@ -239,7 +263,19 @@ class SasaranRenstraController extends Controller
 
     public function deleteIndikator($id)
     {
-        SakipIndikatorsasaranrenstra::findOrFail($id)->delete();
-        return response()->json(['success' => 'Indikator berhasil dihapus.']);
+        \Illuminate\Support\Facades\DB::beginTransaction();
+        try {
+            $indikator = SakipIndikatorsasaranrenstra::findOrFail($id);
+            // Delete associated triwulan
+            \App\Models\SakipIndikatorsasaranrenstraTriwulan::where('refindikatorsasaranrenstra_id', $id)->delete();
+            // Delete the indicator
+            $indikator->delete();
+
+            \Illuminate\Support\Facades\DB::commit();
+            return response()->json(['success' => 'Indikator berhasil dihapus.']);
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }
