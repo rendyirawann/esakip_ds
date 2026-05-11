@@ -31,4 +31,13 @@ class SakipStrategi extends Model
         return $this->belongsTo(SakipPeriode::class, 'refperiode_id', 'refperiode_id');
     }
 
+    public function kebijakan()
+    {
+        return $this->hasMany(SakipKebijakan::class, 'refstrategi_id', 'refstrategi_id');
+    }
+
+    public function sasaranRenstra()
+    {
+        return $this->belongsTo(SakipSasaranrenstra::class, 'refsasaranrenstra_id', 'refsasaranrenstra_id');
+    }
 }

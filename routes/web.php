@@ -225,6 +225,9 @@ Route::prefix('frontend')->name('frontend.')->group(function () {
 
             // Strategi Renstra
             Route::resource('strategi', \App\Http\Controllers\Frontend\Renstra\StrategiRenstraController::class);
+
+            // Kebijakan Renstra
+            Route::resource('kebijakan', \App\Http\Controllers\Frontend\Renstra\KebijakanRenstraController::class);
         });
         
         // Add more frontend routes here
