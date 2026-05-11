@@ -302,6 +302,11 @@ Route::prefix('frontend')->name('frontend.')->group(function () {
             Route::get('anggaran-kegiatan', [\App\Http\Controllers\Frontend\Rkt\RktAnggaranKegiatanController::class, 'index'])->name('anggaran-kegiatan.index');
             Route::get('anggaran-kegiatan/data', [\App\Http\Controllers\Frontend\Rkt\RktAnggaranKegiatanController::class, 'data'])->name('anggaran-kegiatan.data');
             Route::post('anggaran-kegiatan/filter', [\App\Http\Controllers\Frontend\Rkt\RktAnggaranKegiatanController::class, 'storeFilter'])->name('anggaran-kegiatan.filter');
+
+            // Anggaran Sub Kegiatan
+            Route::get('anggaran-subkegiatan', [\App\Http\Controllers\Frontend\Rkt\RktAnggaranSubkegiatanController::class, 'index'])->name('anggaran-subkegiatan.index');
+            Route::get('anggaran-subkegiatan/data', [\App\Http\Controllers\Frontend\Rkt\RktAnggaranSubkegiatanController::class, 'data'])->name('anggaran-subkegiatan.data');
+            Route::post('anggaran-subkegiatan/update', [\App\Http\Controllers\Frontend\Rkt\RktAnggaranSubkegiatanController::class, 'update'])->name('anggaran-subkegiatan.update');
         });
 
         // Add more frontend routes here
