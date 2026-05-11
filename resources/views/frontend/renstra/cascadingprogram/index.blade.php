@@ -60,7 +60,7 @@
                             <select id="filter_skpd" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih SKPD" {{ !$isSuperadmin ? 'disabled' : '' }}>
                                 <option value="">Pilih SKPD</option>
                                 @foreach($skpds as $skpd)
-                                    <option value="{{ $skpd->refskpd_id }}" {{ (isset($current_skpd) && $current_skpd->refskpd_id == $skpd->refskpd_id) ? 'selected' : '' }}>
+                                    <option value="{{ $skpd->refskpd_id }}" {{ (!$isSuperadmin && isset($current_skpd) && $current_skpd->refskpd_id == $skpd->refskpd_id) ? 'selected' : '' }}>
                                         {{ $skpd->nama_skpd }}
                                     </option>
                                 @endforeach

@@ -52,8 +52,8 @@
                     </div>
                     <div class="menu-item"><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Strategi</span></a></div>
                     <div class="menu-item"><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Kebijakan</span></a></div>
-                    <div class="menu-item"><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Program</span></a></div>
-                    <div class="menu-item"><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Kegiatan</span></a></div>
+                    <div class="menu-item"><a class="menu-link {{ request()->routeIs('frontend.renstra.cascadingprogram.index') ? 'active' : '' }}" href="{{ route('frontend.renstra.cascadingprogram.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Cascading Program</span></a></div>
+                    <div class="menu-item"><a class="menu-link {{ request()->routeIs('frontend.renstra.cascadingkegiatan.index') ? 'active' : '' }}" href="{{ route('frontend.renstra.cascadingkegiatan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Cascading Kegiatan</span></a></div>
                     <div class="menu-item"><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Sub Kegiatan</span></a></div>
                 </div>
             </div>

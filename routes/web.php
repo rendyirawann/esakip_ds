@@ -233,7 +233,7 @@ Route::prefix('frontend')->name('frontend.')->group(function () {
             Route::resource('formulasi', \App\Http\Controllers\Frontend\Renstra\FormulasiRenstraController::class);
 
             // Cascading Program
-            Route::get('cascadingprogram/list-data', [\App\Http\Controllers\Frontend\Renstra\CascadingProgramController::class, 'index'])->name('cascadingprogram.data');
+            Route::get('cascadingprogram/data', [\App\Http\Controllers\Frontend\Renstra\CascadingProgramController::class, 'data'])->name('cascadingprogram.data');
             Route::get('cascadingprogram/get-sasaran-renstra', [\App\Http\Controllers\Frontend\Renstra\CascadingProgramController::class, 'getSasaranRenstra'])->name('cascadingprogram.getSasaranRenstra');
             Route::get('cascadingprogram/get-indikator-sasaran-renstra', [\App\Http\Controllers\Frontend\Renstra\CascadingProgramController::class, 'getIndikatorSasaranRenstra'])->name('cascadingprogram.getIndikatorSasaranRenstra');
             Route::get('cascadingprogram/get-associated-values', [\App\Http\Controllers\Frontend\Renstra\CascadingProgramController::class, 'getAssociatedValues'])->name('cascadingprogram.getAssociatedValues');
@@ -244,6 +244,19 @@ Route::prefix('frontend')->name('frontend.')->group(function () {
             Route::get('penjabat-cascading/fetch', [\App\Http\Controllers\Frontend\Renstra\PenjabatCascadingController::class, 'fetchPenjabatskpd'])->name('penjabat-cascading.fetch');
             Route::post('penjabat-cascading', [\App\Http\Controllers\Frontend\Renstra\PenjabatCascadingController::class, 'store'])->name('penjabat-cascading.store');
             Route::delete('penjabat-cascading/{id}', [\App\Http\Controllers\Frontend\Renstra\PenjabatCascadingController::class, 'destroy'])->name('penjabat-cascading.destroy');
+
+            // Cascading Kegiatan
+            Route::get('cascadingkegiatan/data', [\App\Http\Controllers\Frontend\Renstra\CascadingKegiatanController::class, 'data'])->name('cascadingkegiatan.data');
+            Route::get('cascadingkegiatan/get-program-cascading', [\App\Http\Controllers\Frontend\Renstra\CascadingKegiatanController::class, 'getProgramCascading'])->name('cascadingkegiatan.getProgramCascading');
+            Route::get('cascadingkegiatan/get-indikator-program', [\App\Http\Controllers\Frontend\Renstra\CascadingKegiatanController::class, 'getIndikatorProgram'])->name('cascadingkegiatan.getIndikatorProgram');
+            Route::get('cascadingkegiatan/get-associated-values', [\App\Http\Controllers\Frontend\Renstra\CascadingKegiatanController::class, 'getAssociatedValues'])->name('cascadingkegiatan.getAssociatedValues');
+            Route::get('cascadingkegiatan/get-kegiatans', [\App\Http\Controllers\Frontend\Renstra\CascadingKegiatanController::class, 'getKegiatans'])->name('cascadingkegiatan.getKegiatans');
+            Route::resource('cascadingkegiatan', \App\Http\Controllers\Frontend\Renstra\CascadingKegiatanController::class);
+
+            // Penjabat Kegiatan
+            Route::get('penjabat-kegiatan/fetch', [\App\Http\Controllers\Frontend\Renstra\PenjabatKegiatanController::class, 'fetchPenjabatskpd'])->name('penjabat-kegiatan.fetch');
+            Route::post('penjabat-kegiatan', [\App\Http\Controllers\Frontend\Renstra\PenjabatKegiatanController::class, 'store'])->name('penjabat-kegiatan.store');
+            Route::delete('penjabat-kegiatan/{id}', [\App\Http\Controllers\Frontend\Renstra\PenjabatKegiatanController::class, 'destroy'])->name('penjabat-kegiatan.destroy');
         });
         
         // Add more frontend routes here
