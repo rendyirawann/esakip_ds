@@ -76,38 +76,38 @@
             <div class="menu-item menu-accordion {{ request()->is('frontend/pk*') ? 'here show' : '' && !request()->is('frontend/pk-perubahan*') }}" data-kt-menu-trigger="click">
                 <span class="menu-link"><span class="menu-icon"><i class="ki-outline ki-clipboard fs-3"></i></span><span class="menu-title">PK</span><span class="menu-arrow"></span></span>
                 <div class="menu-sub menu-sub-accordion">
-                    <div class="menu-item menu-accordion" data-kt-menu-trigger="click">
+                    <div class="menu-item menu-accordion {{ request()->is('frontend/pk/sasaran*') ? 'here show' : '' }}" data-kt-menu-trigger="click">
                         <span class="menu-link"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target PK Indikator Sasaran</span><span class="menu-arrow"></span></span>
                         <div class="menu-sub menu-sub-accordion">
-                            <div class="menu-item"><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
+                            <div class="menu-item"><a class="menu-link {{ request()->routeIs('frontend.pk.sasaran.index') ? 'active' : '' }}" href="{{ route('frontend.pk.sasaran.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
                             <div class="menu-item"><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
                         </div>
                     </div>
                     <!-- Repeat for Program, Kegiatan, Sub Kegiatan -->
-                    <div class="menu-item menu-accordion" data-kt-menu-trigger="click">
+                    <div class="menu-item menu-accordion {{ request()->is('frontend/pk/program*') ? 'here show' : '' }}" data-kt-menu-trigger="click">
                         <span class="menu-link"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target PK Indikator Program</span><span class="menu-arrow"></span></span>
                         <div class="menu-sub menu-sub-accordion">
-                            <div class="menu-item"><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
+                            <div class="menu-item"><a class="menu-link {{ request()->routeIs('frontend.pk.program.index') ? 'active' : '' }}" href="{{ route('frontend.pk.program.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
                             <div class="menu-item"><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
                         </div>
                     </div>
-                    <div class="menu-item menu-accordion" data-kt-menu-trigger="click">
+                    <div class="menu-item menu-accordion {{ request()->is('frontend/pk/kegiatan*') ? 'here show' : '' }}" data-kt-menu-trigger="click">
                         <span class="menu-link"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target PK Indikator Kegiatan</span><span class="menu-arrow"></span></span>
                         <div class="menu-sub menu-sub-accordion">
-                            <div class="menu-item"><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
+                            <div class="menu-item"><a class="menu-link {{ request()->routeIs('frontend.pk.kegiatan.index') ? 'active' : '' }}" href="{{ route('frontend.pk.kegiatan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
                             <div class="menu-item"><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
                         </div>
                     </div>
-                    <div class="menu-item menu-accordion" data-kt-menu-trigger="click">
+                    <div class="menu-item menu-accordion {{ request()->is('frontend/pk/subkegiatan*') ? 'here show' : '' }}" data-kt-menu-trigger="click">
                         <span class="menu-link"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target PK Indikator Sub Kegiatan</span><span class="menu-arrow"></span></span>
                         <div class="menu-sub menu-sub-accordion">
-                            <div class="menu-item"><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
+                            <div class="menu-item"><a class="menu-link {{ request()->routeIs('frontend.pk.subkegiatan.index') ? 'active' : '' }}" href="{{ route('frontend.pk.subkegiatan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
                             <div class="menu-item"><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
                         </div>
                     </div>
-                    <div class="menu-item"><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Anggaran Program PK</span></a></div>
-                    <div class="menu-item"><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Anggaran Kegiatan PK</span></a></div>
-                    <div class="menu-item"><a class="menu-link" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Anggaran Sub Kegiatan PK</span></a></div>
+                    <div class="menu-item"><a class="menu-link {{ request()->routeIs('frontend.pk.anggaran-program.index') ? 'active' : '' }}" href="{{ route('frontend.pk.anggaran-program.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Anggaran Program PK</span></a></div>
+                    <div class="menu-item"><a class="menu-link {{ request()->routeIs('frontend.pk.anggaran-kegiatan.index') ? 'active' : '' }}" href="{{ route('frontend.pk.anggaran-kegiatan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Anggaran Kegiatan PK</span></a></div>
+                    <div class="menu-item"><a class="menu-link {{ request()->routeIs('frontend.pk.anggaran-subkegiatan.index') ? 'active' : '' }}" href="{{ route('frontend.pk.anggaran-subkegiatan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Anggaran Sub Kegiatan PK</span></a></div>
                 </div>
             </div>
 

@@ -309,6 +309,46 @@ Route::prefix('frontend')->name('frontend.')->group(function () {
             Route::post('anggaran-subkegiatan/update', [\App\Http\Controllers\Frontend\Rkt\RktAnggaranSubkegiatanController::class, 'update'])->name('anggaran-subkegiatan.update');
         });
 
+        // PK (Perjanjian Kinerja)
+        Route::prefix('pk')->name('pk.')->group(function() {
+            // Target PK Sasaran
+            Route::get('sasaran', [\App\Http\Controllers\Frontend\Pk\PkSasaranController::class, 'index'])->name('sasaran.index');
+            Route::get('sasaran/data', [\App\Http\Controllers\Frontend\Pk\PkSasaranController::class, 'data'])->name('sasaran.data');
+            Route::get('sasaran/{id}/edit', [\App\Http\Controllers\Frontend\Pk\PkSasaranController::class, 'edit'])->name('sasaran.edit');
+            Route::post('sasaran/store', [\App\Http\Controllers\Frontend\Pk\PkSasaranController::class, 'store'])->name('sasaran.store');
+
+            // Target PK Program
+            Route::get('program', [\App\Http\Controllers\Frontend\Pk\PkProgramController::class, 'index'])->name('program.index');
+            Route::get('program/data', [\App\Http\Controllers\Frontend\Pk\PkProgramController::class, 'data'])->name('program.data');
+            Route::get('program/{id}/edit', [\App\Http\Controllers\Frontend\Pk\PkProgramController::class, 'edit'])->name('program.edit');
+            Route::post('program/store', [\App\Http\Controllers\Frontend\Pk\PkProgramController::class, 'store'])->name('program.store');
+
+            // Target PK Kegiatan
+            Route::get('kegiatan', [\App\Http\Controllers\Frontend\Pk\PkKegiatanController::class, 'index'])->name('kegiatan.index');
+            Route::get('kegiatan/data', [\App\Http\Controllers\Frontend\Pk\PkKegiatanController::class, 'data'])->name('kegiatan.data');
+            Route::get('kegiatan/{id}/edit', [\App\Http\Controllers\Frontend\Pk\PkKegiatanController::class, 'edit'])->name('kegiatan.edit');
+            Route::post('kegiatan/store', [\App\Http\Controllers\Frontend\Pk\PkKegiatanController::class, 'store'])->name('kegiatan.store');
+
+            // Target PK Sub Kegiatan
+            Route::get('subkegiatan', [\App\Http\Controllers\Frontend\Pk\PkSubkegiatanController::class, 'index'])->name('subkegiatan.index');
+            Route::get('subkegiatan/data', [\App\Http\Controllers\Frontend\Pk\PkSubkegiatanController::class, 'data'])->name('subkegiatan.data');
+            Route::get('subkegiatan/{id}/edit', [\App\Http\Controllers\Frontend\Pk\PkSubkegiatanController::class, 'edit'])->name('subkegiatan.edit');
+            Route::post('subkegiatan/store', [\App\Http\Controllers\Frontend\Pk\PkSubkegiatanController::class, 'store'])->name('subkegiatan.store');
+
+            // Anggaran Program PK
+            Route::get('anggaran-program', [\App\Http\Controllers\Frontend\Pk\PkAnggaranProgramController::class, 'index'])->name('anggaran-program.index');
+            Route::get('anggaran-program/data', [\App\Http\Controllers\Frontend\Pk\PkAnggaranProgramController::class, 'data'])->name('anggaran-program.data');
+
+            // Anggaran Kegiatan PK
+            Route::get('anggaran-kegiatan', [\App\Http\Controllers\Frontend\Pk\PkAnggaranKegiatanController::class, 'index'])->name('anggaran-kegiatan.index');
+            Route::get('anggaran-kegiatan/data', [\App\Http\Controllers\Frontend\Pk\PkAnggaranKegiatanController::class, 'data'])->name('anggaran-kegiatan.data');
+
+            // Anggaran Sub Kegiatan PK
+            Route::get('anggaran-subkegiatan', [\App\Http\Controllers\Frontend\Pk\PkAnggaranSubkegiatanController::class, 'index'])->name('anggaran-subkegiatan.index');
+            Route::get('anggaran-subkegiatan/data', [\App\Http\Controllers\Frontend\Pk\PkAnggaranSubkegiatanController::class, 'data'])->name('anggaran-subkegiatan.data');
+            Route::post('anggaran-subkegiatan/update', [\App\Http\Controllers\Frontend\Pk\PkAnggaranSubkegiatanController::class, 'update'])->name('anggaran-subkegiatan.update');
+        });
+
         // Add more frontend routes here
     });
 });
