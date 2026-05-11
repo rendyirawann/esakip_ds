@@ -292,6 +292,16 @@ Route::prefix('frontend')->name('frontend.')->group(function () {
             Route::get('subkegiatan/data', [\App\Http\Controllers\Frontend\Rkt\RktSubkegiatanController::class, 'data'])->name('subkegiatan.data');
             Route::post('subkegiatan/filter', [\App\Http\Controllers\Frontend\Rkt\RktSubkegiatanController::class, 'storeFilter'])->name('subkegiatan.filter');
             Route::resource('subkegiatan', \App\Http\Controllers\Frontend\Rkt\RktSubkegiatanController::class);
+
+            // Anggaran Program
+            Route::get('anggaran-program', [\App\Http\Controllers\Frontend\Rkt\RktAnggaranProgramController::class, 'index'])->name('anggaran-program.index');
+            Route::get('anggaran-program/data', [\App\Http\Controllers\Frontend\Rkt\RktAnggaranProgramController::class, 'data'])->name('anggaran-program.data');
+            Route::post('anggaran-program/filter', [\App\Http\Controllers\Frontend\Rkt\RktAnggaranProgramController::class, 'storeFilter'])->name('anggaran-program.filter');
+
+            // Anggaran Kegiatan
+            Route::get('anggaran-kegiatan', [\App\Http\Controllers\Frontend\Rkt\RktAnggaranKegiatanController::class, 'index'])->name('anggaran-kegiatan.index');
+            Route::get('anggaran-kegiatan/data', [\App\Http\Controllers\Frontend\Rkt\RktAnggaranKegiatanController::class, 'data'])->name('anggaran-kegiatan.data');
+            Route::post('anggaran-kegiatan/filter', [\App\Http\Controllers\Frontend\Rkt\RktAnggaranKegiatanController::class, 'storeFilter'])->name('anggaran-kegiatan.filter');
         });
 
         // Add more frontend routes here

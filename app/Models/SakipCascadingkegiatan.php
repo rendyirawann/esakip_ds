@@ -45,4 +45,14 @@ class SakipCascadingkegiatan extends Model
     {
         return $this->belongsTo(SakipCascadingprogram::class, 'refcascadingprogram_id', 'refcascadingprogram_id');
     }
+
+    public function cascadingSubkegiatans()
+    {
+        return $this->hasMany(SakipCascadingsubkegiatan::class, 'refkegiatan_id', 'refkegiatan_id');
+    }
+
+    public function indikatorSubkegiatans()
+    {
+        return $this->hasMany(SakipIndikatorcascadingsubkegiatan::class, 'refkegiatan_id', 'refkegiatan_id');
+    }
 }
