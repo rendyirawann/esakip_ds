@@ -75,28 +75,28 @@
                     <span class="menu-link py-3 {{ request()->is('frontend/pk/sasaran*') ? 'active' : '' }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target PK Indikator Sasaran</span><span class="menu-arrow"></span></span>
                     <div class="menu-sub menu-sub-lg-dropdown w-lg-200px px-lg-2 py-lg-4">
                         <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pk.sasaran.index') ? 'active' : '' }}" href="{{ route('frontend.pk.sasaran.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pk.sasaran.triwulan.*') ? 'active' : '' }}" href="{{ route('frontend.pk.sasaran.triwulan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
                     </div>
                 </div>
                 <div class="menu-item menu-accordion {{ request()->is('frontend/pk/program*') ? 'here show' : '' }}" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
                     <span class="menu-link py-3 {{ request()->is('frontend/pk/program*') ? 'active' : '' }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target PK Indikator Program</span><span class="menu-arrow"></span></span>
                     <div class="menu-sub menu-sub-lg-dropdown w-lg-200px px-lg-2 py-lg-4">
                         <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pk.program.index') ? 'active' : '' }}" href="{{ route('frontend.pk.program.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pk.program.triwulan.*') ? 'active' : '' }}" href="{{ route('frontend.pk.program.triwulan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
                     </div>
                 </div>
                 <div class="menu-item menu-accordion {{ request()->is('frontend/pk/kegiatan*') ? 'here show' : '' }}" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
                     <span class="menu-link py-3 {{ request()->is('frontend/pk/kegiatan*') ? 'active' : '' }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target PK Indikator Kegiatan</span><span class="menu-arrow"></span></span>
                     <div class="menu-sub menu-sub-lg-dropdown w-lg-200px px-lg-2 py-lg-4">
                         <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pk.kegiatan.index') ? 'active' : '' }}" href="{{ route('frontend.pk.kegiatan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pk.kegiatan.triwulan.*') ? 'active' : '' }}" href="{{ route('frontend.pk.kegiatan.triwulan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
                     </div>
                 </div>
                 <div class="menu-item menu-accordion {{ request()->is('frontend/pk/subkegiatan*') ? 'here show' : '' }}" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
                     <span class="menu-link py-3 {{ request()->is('frontend/pk/subkegiatan*') ? 'active' : '' }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target PK Indikator Sub Kegiatan</span><span class="menu-arrow"></span></span>
                     <div class="menu-sub menu-sub-lg-dropdown w-lg-200px px-lg-2 py-lg-4">
                         <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pk.subkegiatan.index') ? 'active' : '' }}" href="{{ route('frontend.pk.subkegiatan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pk.subkegiatan.triwulan.*') ? 'active' : '' }}" href="{{ route('frontend.pk.subkegiatan.triwulan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
                     </div>
                 </div>
                 <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pk.anggaran-program.index') ? 'active' : '' }}" href="{{ route('frontend.pk.anggaran-program.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Anggaran Program PK</span></a></div>

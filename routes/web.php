@@ -317,11 +317,23 @@ Route::prefix('frontend')->name('frontend.')->group(function () {
             Route::get('sasaran/{id}/edit', [\App\Http\Controllers\Frontend\Pk\PkSasaranController::class, 'edit'])->name('sasaran.edit');
             Route::post('sasaran/store', [\App\Http\Controllers\Frontend\Pk\PkSasaranController::class, 'store'])->name('sasaran.store');
 
+            // Target PK Triwulan Sasaran
+            Route::get('sasaran-triwulan', [\App\Http\Controllers\Frontend\Pk\PkTriwulanSasaranController::class, 'index'])->name('sasaran.triwulan.index');
+            Route::get('sasaran-triwulan/data', [\App\Http\Controllers\Frontend\Pk\PkTriwulanSasaranController::class, 'data'])->name('sasaran.triwulan.data');
+            Route::get('sasaran-triwulan/{id}/edit', [\App\Http\Controllers\Frontend\Pk\PkTriwulanSasaranController::class, 'edit'])->name('sasaran.triwulan.edit');
+            Route::post('sasaran-triwulan/store', [\App\Http\Controllers\Frontend\Pk\PkTriwulanSasaranController::class, 'store'])->name('sasaran.triwulan.store');
+
             // Target PK Program
             Route::get('program', [\App\Http\Controllers\Frontend\Pk\PkProgramController::class, 'index'])->name('program.index');
             Route::get('program/data', [\App\Http\Controllers\Frontend\Pk\PkProgramController::class, 'data'])->name('program.data');
             Route::get('program/{id}/edit', [\App\Http\Controllers\Frontend\Pk\PkProgramController::class, 'edit'])->name('program.edit');
             Route::post('program/store', [\App\Http\Controllers\Frontend\Pk\PkProgramController::class, 'store'])->name('program.store');
+
+            // Target PK Triwulan Program
+            Route::get('program-triwulan', [\App\Http\Controllers\Frontend\Pk\PkTriwulanProgramController::class, 'index'])->name('program.triwulan.index');
+            Route::get('program-triwulan/data', [\App\Http\Controllers\Frontend\Pk\PkTriwulanProgramController::class, 'data'])->name('program.triwulan.data');
+            Route::get('program-triwulan/{id}/edit', [\App\Http\Controllers\Frontend\Pk\PkTriwulanProgramController::class, 'edit'])->name('program.triwulan.edit');
+            Route::post('program-triwulan/store', [\App\Http\Controllers\Frontend\Pk\PkTriwulanProgramController::class, 'store'])->name('program.triwulan.store');
 
             // Target PK Kegiatan
             Route::get('kegiatan', [\App\Http\Controllers\Frontend\Pk\PkKegiatanController::class, 'index'])->name('kegiatan.index');
@@ -329,11 +341,23 @@ Route::prefix('frontend')->name('frontend.')->group(function () {
             Route::get('kegiatan/{id}/edit', [\App\Http\Controllers\Frontend\Pk\PkKegiatanController::class, 'edit'])->name('kegiatan.edit');
             Route::post('kegiatan/store', [\App\Http\Controllers\Frontend\Pk\PkKegiatanController::class, 'store'])->name('kegiatan.store');
 
+            // Target PK Triwulan Kegiatan
+            Route::get('kegiatan-triwulan', [\App\Http\Controllers\Frontend\Pk\PkTriwulanKegiatanController::class, 'index'])->name('kegiatan.triwulan.index');
+            Route::get('kegiatan-triwulan/data', [\App\Http\Controllers\Frontend\Pk\PkTriwulanKegiatanController::class, 'data'])->name('kegiatan.triwulan.data');
+            Route::get('kegiatan-triwulan/{id}/edit', [\App\Http\Controllers\Frontend\Pk\PkTriwulanKegiatanController::class, 'edit'])->name('kegiatan.triwulan.edit');
+            Route::post('kegiatan-triwulan/store', [\App\Http\Controllers\Frontend\Pk\PkTriwulanKegiatanController::class, 'store'])->name('kegiatan.triwulan.store');
+
             // Target PK Sub Kegiatan
             Route::get('subkegiatan', [\App\Http\Controllers\Frontend\Pk\PkSubkegiatanController::class, 'index'])->name('subkegiatan.index');
             Route::get('subkegiatan/data', [\App\Http\Controllers\Frontend\Pk\PkSubkegiatanController::class, 'data'])->name('subkegiatan.data');
             Route::get('subkegiatan/{id}/edit', [\App\Http\Controllers\Frontend\Pk\PkSubkegiatanController::class, 'edit'])->name('subkegiatan.edit');
             Route::post('subkegiatan/store', [\App\Http\Controllers\Frontend\Pk\PkSubkegiatanController::class, 'store'])->name('subkegiatan.store');
+
+            // Target PK Triwulan Sub Kegiatan
+            Route::get('subkegiatan-triwulan', [\App\Http\Controllers\Frontend\Pk\PkTriwulanSubkegiatanController::class, 'index'])->name('subkegiatan.triwulan.index');
+            Route::get('subkegiatan-triwulan/data', [\App\Http\Controllers\Frontend\Pk\PkTriwulanSubkegiatanController::class, 'data'])->name('subkegiatan.triwulan.data');
+            Route::get('subkegiatan-triwulan/{id}/edit', [\App\Http\Controllers\Frontend\Pk\PkTriwulanSubkegiatanController::class, 'edit'])->name('subkegiatan.triwulan.edit');
+            Route::post('subkegiatan-triwulan/store', [\App\Http\Controllers\Frontend\Pk\PkTriwulanSubkegiatanController::class, 'store'])->name('subkegiatan.triwulan.store');
 
             // Anggaran Program PK
             Route::get('anggaran-program', [\App\Http\Controllers\Frontend\Pk\PkAnggaranProgramController::class, 'index'])->name('anggaran-program.index');
