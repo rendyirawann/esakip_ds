@@ -46,17 +46,17 @@
         </div>
 
         <!--begin::RKT-->
-        <div class="menu-item menu-lg-indention me-0 me-lg-1" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start">
+        <div class="menu-item menu-lg-indention me-0 me-lg-1 {{ request()->is('frontend/rkt*') ? 'here show' : '' }}" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start">
             <span class="menu-link py-3">
                 <span class="menu-icon"><i class="ki-outline ki-scroll fs-3"></i></span>
                 <span class="menu-title">RKT</span>
                 <span class="menu-arrow d-lg-none"></span>
             </span>
             <div class="menu-sub menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-300px">
-                <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target RKT Indikator Sasaran</span></a></div>
-                <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target RKT Indikator Program</span></a></div>
-                <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target RKT Indikator Kegiatan</span></a></div>
-                <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target RKT Output Sub Kegiatan</span></a></div>
+                <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.rkt.sasaran.index') ? 'active' : '' }}" href="{{ route('frontend.rkt.sasaran.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target RKT Indikator Sasaran</span></a></div>
+                <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.rkt.program.index') ? 'active' : '' }}" href="{{ route('frontend.rkt.program.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target RKT Indikator Program</span></a></div>
+                <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.rkt.kegiatan.index') ? 'active' : '' }}" href="{{ route('frontend.rkt.kegiatan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target RKT Indikator Kegiatan</span></a></div>
+                <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.rkt.subkegiatan.index') ? 'active' : '' }}" href="{{ route('frontend.rkt.subkegiatan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target RKT Output Sub Kegiatan</span></a></div>
                 <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Anggaran Program RKT</span></a></div>
                 <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Anggaran Kegiatan RKT</span></a></div>
                 <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Anggaran Sub Kegiatan RKT</span></a></div>

@@ -30,4 +30,9 @@ class SakipIndikatorsasaranrenstra extends Model
     {
         return $this->hasMany(SakipIndikatorsasaranrenstraTriwulan::class, 'refindikatorsasaranrenstra_id', 'refindikatorsasaranrenstra_id');
     }
+
+    public function sasaran()
+    {
+        return $this->belongsTo(SakipSasaranrenstra::class, 'refsasaranrenstra_id', 'refsasaranrenstra_id');
+    }
 }

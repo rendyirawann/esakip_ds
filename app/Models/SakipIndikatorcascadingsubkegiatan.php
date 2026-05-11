@@ -41,4 +41,9 @@ class SakipIndikatorcascadingsubkegiatan extends Model
         return $this->belongsTo(SakipSubkegiatan::class, 'refsubkegiatan_id', 'refsubkegiatan_id');
     }
 
+    public function cascading()
+    {
+        return $this->belongsTo(SakipCascadingsubkegiatan::class, 'refcascadingsubkegiatan_id', 'refcascadingsubkegiatan_id');
+    }
+
 }

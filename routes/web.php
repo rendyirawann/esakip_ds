@@ -271,6 +271,29 @@ Route::prefix('frontend')->name('frontend.')->group(function () {
             Route::delete('penjabat-subkegiatan/{id}', [\App\Http\Controllers\Frontend\Renstra\PenjabatSubKegiatanController::class, 'destroy'])->name('penjabat-subkegiatan.destroy');
         });
         
+        // RKT Routes
+        Route::prefix('rkt')->name('rkt.')->group(function () {
+            // Sasaran
+            Route::get('sasaran/data', [\App\Http\Controllers\Frontend\Rkt\RktSasaranController::class, 'data'])->name('sasaran.data');
+            Route::post('sasaran/filter', [\App\Http\Controllers\Frontend\Rkt\RktSasaranController::class, 'storeFilter'])->name('sasaran.filter');
+            Route::resource('sasaran', \App\Http\Controllers\Frontend\Rkt\RktSasaranController::class);
+
+            // Program
+            Route::get('program/data', [\App\Http\Controllers\Frontend\Rkt\RktProgramController::class, 'data'])->name('program.data');
+            Route::post('program/filter', [\App\Http\Controllers\Frontend\Rkt\RktProgramController::class, 'storeFilter'])->name('program.filter');
+            Route::resource('program', \App\Http\Controllers\Frontend\Rkt\RktProgramController::class);
+
+            // Kegiatan
+            Route::get('kegiatan/data', [\App\Http\Controllers\Frontend\Rkt\RktKegiatanController::class, 'data'])->name('kegiatan.data');
+            Route::post('kegiatan/filter', [\App\Http\Controllers\Frontend\Rkt\RktKegiatanController::class, 'storeFilter'])->name('kegiatan.filter');
+            Route::resource('kegiatan', \App\Http\Controllers\Frontend\Rkt\RktKegiatanController::class);
+
+            // Subkegiatan
+            Route::get('subkegiatan/data', [\App\Http\Controllers\Frontend\Rkt\RktSubkegiatanController::class, 'data'])->name('subkegiatan.data');
+            Route::post('subkegiatan/filter', [\App\Http\Controllers\Frontend\Rkt\RktSubkegiatanController::class, 'storeFilter'])->name('subkegiatan.filter');
+            Route::resource('subkegiatan', \App\Http\Controllers\Frontend\Rkt\RktSubkegiatanController::class);
+        });
+
         // Add more frontend routes here
     });
 });

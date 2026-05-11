@@ -36,4 +36,9 @@ class SakipIndikatorcascadingprogram extends Model
         return $this->belongsTo(SakipProgram::class, 'refprogram_id', 'refprogram_id');
     }
 
+    public function cascading()
+    {
+        return $this->belongsTo(SakipCascadingprogram::class, 'refcascadingprogram_id', 'refcascadingprogram_id');
+    }
+
 }
