@@ -234,7 +234,16 @@ Route::prefix('frontend')->name('frontend.')->group(function () {
 
             // Cascading Program
             Route::get('cascadingprogram/list-data', [\App\Http\Controllers\Frontend\Renstra\CascadingProgramController::class, 'index'])->name('cascadingprogram.data');
+            Route::get('cascadingprogram/get-sasaran-renstra', [\App\Http\Controllers\Frontend\Renstra\CascadingProgramController::class, 'getSasaranRenstra'])->name('cascadingprogram.getSasaranRenstra');
+            Route::get('cascadingprogram/get-indikator-sasaran-renstra', [\App\Http\Controllers\Frontend\Renstra\CascadingProgramController::class, 'getIndikatorSasaranRenstra'])->name('cascadingprogram.getIndikatorSasaranRenstra');
+            Route::get('cascadingprogram/get-associated-values', [\App\Http\Controllers\Frontend\Renstra\CascadingProgramController::class, 'getAssociatedValues'])->name('cascadingprogram.getAssociatedValues');
+            Route::get('cascadingprogram/get-programs', [\App\Http\Controllers\Frontend\Renstra\CascadingProgramController::class, 'getPrograms'])->name('cascadingprogram.getPrograms');
             Route::resource('cascadingprogram', \App\Http\Controllers\Frontend\Renstra\CascadingProgramController::class);
+
+            // Penjabat Cascading
+            Route::get('penjabat-cascading/fetch', [\App\Http\Controllers\Frontend\Renstra\PenjabatCascadingController::class, 'fetchPenjabatskpd'])->name('penjabat-cascading.fetch');
+            Route::post('penjabat-cascading', [\App\Http\Controllers\Frontend\Renstra\PenjabatCascadingController::class, 'store'])->name('penjabat-cascading.store');
+            Route::delete('penjabat-cascading/{id}', [\App\Http\Controllers\Frontend\Renstra\PenjabatCascadingController::class, 'destroy'])->name('penjabat-cascading.destroy');
         });
         
         // Add more frontend routes here

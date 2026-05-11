@@ -82,7 +82,8 @@ class CascadingProgramController extends Controller
                 ->make(true);
         }
 
-        return view('frontend.renstra.cascadingprogram.index', compact('skpds', 'periodes', 'isSuperadmin', 'current_skpd'));
+        $bidangs = \App\Models\SakipBidang::where('bidang_isaktif', 'T')->orderBy('kode_bidang', 'asc')->get();
+        return view('frontend.renstra.cascadingprogram.index', compact('skpds', 'periodes', 'isSuperadmin', 'current_skpd', 'bidangs'));
     }
 
     public function show($id)
@@ -91,15 +92,169 @@ class CascadingProgramController extends Controller
         return response()->json($data);
     }
 
+    public function getSasaranRenstra(Request $request)
+    {
+        $skpd_id = $request->skpd_id;
+        $periode_id = $request->periode_id;
+        
+        $data = \App\Models\SakipSasaranrenstra::where('refskpd_id', $skpd_id)
+            ->where('refperiode_id', $periode_id)
+            ->get();
+            
+        return response()->json($data);
+    }
+
+    public function getIndikatorSasaranRenstra(Request $request)
+    {
+        $sasaran_renstra_id = $request->sasaran_renstra_id;
+        $data = \App\Models\SakipIndikatorsasaranrenstra::where('refsasaranrenstra_id', $sasaran_renstra_id)->get();
+        return response()->json($data);
+    }
+
+    public function getAssociatedValues(Request $request)
+    {
+        $sasaran_renstra_id = $request->sasaran_renstra_id;
+        // Pastikan kita ambil data langsung dari kolom tabel sakip_sasaranrenstra
+        $sasaranRenstra = \App\Models\SakipSasaranrenstra::find($sasaran_renstra_id);
+        
+        if ($sasaranRenstra) {
+            return response()->json([
+                'refsasaran_id' => $sasaranRenstra->refsasaran_id,
+                'reftujuan_id' => $sasaranRenstra->reftujuan_id,
+                'refmisi_id' => $sasaranRenstra->refmisi_id,
+                'uraian_misi' => $sasaranRenstra->tujuan->misi->uraian_misi ?? '-',
+                'uraian_tujuan' => $sasaranRenstra->tujuan->uraian_tujuan ?? '-',
+                'uraian_sasaran' => $sasaranRenstra->uraian_sasaranrenstra ?? '-',
+            ]);
+        }
+        return response()->json([]);
+    }
+
+    public function getPrograms(Request $request)
+    {
+        $bidang_id = $request->bidang_id;
+        $data = SakipProgram::where('refbidang_id', $bidang_id)->where('program_isaktif', 'T')->get();
+        return response()->json($data);
+    }
+
     public function store(Request $request)
     {
-        // CRUD implementation for store
-        // ... (can be completed based on the form structure later)
+        DB::beginTransaction();
+        try {
+            // Sync sequences to prevent duplicate key errors (PostgreSQL specific)
+            DB::statement("SELECT setval(pg_get_serial_sequence('sakip_cascadingprogram', 'refcascadingprogram_id'), coalesce(max(refcascadingprogram_id), 0) + 1, false) FROM sakip_cascadingprogram");
+            DB::statement("SELECT setval(pg_get_serial_sequence('sakip_indikatorcascadingprogram', 'refindikatorprogram_id'), coalesce(max(refindikatorprogram_id), 0) + 1, false) FROM sakip_indikatorcascadingprogram");
+            DB::statement("SELECT setval(pg_get_serial_sequence('sakip_indikatorcascadingprogram_triwulan', 'refindikatorprogramtriwulan_id'), coalesce(max(refindikatorprogramtriwulan_id), 0) + 1, false) FROM sakip_indikatorcascadingprogram_triwulan");
+
+            $model = new SakipCascadingprogram();
+            $model->fill($request->all());
+
+            // Safety Check: Fetch associated IDs from Sasaran Renstra if null
+            if (!$model->refsasaran_id || !$model->reftujuan_id || !$model->refmisi_id) {
+                $sr = \App\Models\SakipSasaranrenstra::find($request->refsasaranrenstra_id);
+                if ($sr) {
+                    $model->refsasaran_id = $sr->refsasaran_id;
+                    $model->reftujuan_id = $sr->reftujuan_id;
+                    $model->refmisi_id = $sr->refmisi_id;
+                }
+            }
+
+            $model->program_target = str_replace(',', '.', $request->program_target);
+            $model->save();
+
+            // Step 1: Create Indikator Cascading Program
+            $indikator = new SakipIndikatorcascadingprogram();
+            $indikator->refcascadingprogram_id = $model->refcascadingprogram_id;
+            $indikator->refsasaranrenstra_id = $model->refsasaranrenstra_id;
+            $indikator->refskpd_id = $model->refskpd_id;
+            $indikator->refperiode_id = $model->refperiode_id;
+            $indikator->refbidang_id = $model->refbidang_id;
+            $indikator->refprogram_id = $model->refprogram_id;
+            $indikator->target_rkt = $model->program_target;
+            $indikator->save();
+
+            // Step 2: Create 4 Triwulan rows
+            for ($i = 1; $i <= 4; $i++) {
+                $triwulan = new \App\Models\SakipIndikatorcascadingprogramTriwulan();
+                $triwulan->refindikatorprogram_id = $indikator->refindikatorprogram_id;
+                $triwulan->refcascadingprogram_id = $model->refcascadingprogram_id;
+                $triwulan->refsasaranrenstra_id = $model->refsasaranrenstra_id;
+                $triwulan->refskpd_id = $model->refskpd_id;
+                $triwulan->refperiode_id = $model->refperiode_id;
+                $triwulan->refbidang_id = $model->refbidang_id;
+                $triwulan->refprogram_id = $model->refprogram_id;
+                $triwulan->triwulan_target_rkt = $model->program_target;
+                $triwulan->reftriwulan_id = $i;
+                $triwulan->save();
+            }
+
+            DB::commit();
+            return response()->json(['success' => 'Cascading Program berhasil ditambahkan!']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            $model = SakipCascadingprogram::findOrFail($id);
+            $model->fill($request->all());
+
+            // Safety Check: Fetch associated IDs from Sasaran Renstra if null
+            if (!$model->refsasaran_id || !$model->reftujuan_id || !$model->refmisi_id) {
+                $sr = \App\Models\SakipSasaranrenstra::find($request->refsasaranrenstra_id);
+                if ($sr) {
+                    $model->refsasaran_id = $sr->refsasaran_id;
+                    $model->reftujuan_id = $sr->reftujuan_id;
+                    $model->refmisi_id = $sr->refmisi_id;
+                }
+            }
+
+            $model->program_target = str_replace(',', '.', $request->program_target);
+            $model->save();
+
+            // Update associated indicators
+            SakipIndikatorcascadingprogram::where('refcascadingprogram_id', $id)->update([
+                'target_rkt' => $model->program_target
+            ]);
+
+            // Update associated triwulan
+            \App\Models\SakipIndikatorcascadingprogramTriwulan::where('refcascadingprogram_id', $id)->update([
+                'triwulan_target_rkt' => $model->program_target
+            ]);
+
+            DB::commit();
+            return response()->json(['success' => 'Cascading Program berhasil diperbarui!']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function destroy($id)
     {
-        SakipCascadingprogram::destroy($id);
-        return response()->json(['success' => 'Cascading Program berhasil dihapus!']);
+        DB::beginTransaction();
+        try {
+            // Delete associated Triwulan
+            \App\Models\SakipIndikatorcascadingprogramTriwulan::where('refcascadingprogram_id', $id)->delete();
+            
+            // Delete associated Indikator
+            SakipIndikatorcascadingprogram::where('refcascadingprogram_id', $id)->delete();
+            
+            // Delete associated Penjabat linkages
+            SakipPenjabatskpdCascadingprogram::where('refcascadingprogram_id', $id)->delete();
+
+            // Finally delete the program
+            SakipCascadingprogram::destroy($id);
+
+            DB::commit();
+            return response()->json(['success' => 'Cascading Program dan data terkait berhasil dihapus!']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }
