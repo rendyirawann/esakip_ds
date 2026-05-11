@@ -31,9 +31,18 @@ class CascadingKegiatanController extends Controller
         $skpd_id = $request->skpd_id;
         $periode_id = $request->periode_id;
 
-        $query = SakipCascadingkegiatan::with(['program', 'kegiatan', 'periode', 'skpd', 'penjabat.penjabatMaster', 'cascadingProgram.program'])
-            ->where('refskpd_id', $skpd_id)
-            ->where('refperiode_id', $periode_id);
+        $query = SakipCascadingkegiatan::select('sakip_cascadingkegiatan.*')
+            ->join('sakip_cascadingprogram', 'sakip_cascadingkegiatan.refcascadingprogram_id', '=', 'sakip_cascadingprogram.refcascadingprogram_id')
+            ->join('sakip_kegiatan', 'sakip_cascadingkegiatan.refkegiatan_id', '=', 'sakip_kegiatan.refkegiatan_id')
+            ->with(['program', 'kegiatan', 'periode', 'skpd', 'penjabat.penjabatMaster', 'cascadingProgram.program', 'cascadingProgram.misi', 'cascadingProgram.tujuanRpjmd', 'cascadingProgram.sasaranRenstra'])
+            ->where('sakip_cascadingkegiatan.refskpd_id', $skpd_id)
+            ->where('sakip_cascadingkegiatan.refperiode_id', $periode_id)
+            ->orderBy('sakip_cascadingprogram.refmisi_id')
+            ->orderBy('sakip_cascadingprogram.reftujuan_id')
+            ->orderBy('sakip_cascadingprogram.refsasaran_id')
+            ->orderBy('sakip_cascadingprogram.refprogram_id')
+            ->orderBy('sakip_cascadingprogram.uraian_indikatorprogram')
+            ->orderBy('sakip_kegiatan.nama_kegiatan');
 
         return DataTables::of($query)
             ->addColumn('misi_text', function($row) {
@@ -156,6 +165,8 @@ class CascadingKegiatanController extends Controller
             $indikator = new SakipIndikatorcascadingkegiatan();
             $indikator->refcascadingkegiatan_id = $model->refcascadingkegiatan_id;
             $indikator->refcascadingprogram_id = $model->refcascadingprogram_id;
+            $indikator->refsasaranrenstra_id = $model->refsasaranrenstra_id;
+            $indikator->refindikatorsasaranrenstra_id = $model->refindikatorsasaranrenstra_id;
             $indikator->refskpd_id = $model->refskpd_id;
             $indikator->refperiode_id = $model->refperiode_id;
             $indikator->refprogram_id = $model->refprogram_id;
@@ -169,6 +180,8 @@ class CascadingKegiatanController extends Controller
                 $triwulan->refindikatorkegiatan_id = $indikator->refindikatorkegiatan_id;
                 $triwulan->refcascadingkegiatan_id = $model->refcascadingkegiatan_id;
                 $triwulan->refcascadingprogram_id = $model->refcascadingprogram_id;
+                $triwulan->refsasaranrenstra_id = $model->refsasaranrenstra_id;
+                $triwulan->refindikatorsasaranrenstra_id = $model->refindikatorsasaranrenstra_id;
                 $triwulan->refskpd_id = $model->refskpd_id;
                 $triwulan->refperiode_id = $model->refperiode_id;
                 $triwulan->refprogram_id = $model->refprogram_id;
