@@ -50,10 +50,21 @@ class PkAnggaranProgramController extends Controller
             ->where('refskpd_id', $skpd_id)
             ->where('refperiode_id', $periode_id)
             ->groupBy('refsasaranrenstra_id', 'refprogram_id', 'refskpd_id', 'refperiode_id')
-            ->withSum(['indikatorSubkegiatans as total_anggaran_pk' => function($q) use ($skpd_id, $periode_id) {
-                $q->where('refskpd_id', $skpd_id)
+            ->withSum(['cascadingSubkegiatans as total_anggaran_renstra' => function($q) use ($skpd_id, $periode_id) {
+                $q->select(\DB::raw('SUM(CAST(subkegiatan_anggaran AS BIGINT))'))
+                  ->where('refskpd_id', $skpd_id)
                   ->where('refperiode_id', $periode_id);
-            }], \DB::raw('CAST(anggaran_pk AS BIGINT)'));
+            }], 'subkegiatan_anggaran')
+            ->withSum(['indikatorSubkegiatans as total_anggaran_rkt' => function($q) use ($skpd_id, $periode_id) {
+                $q->select(\DB::raw('SUM(CAST(anggaran_rkt AS BIGINT))'))
+                  ->where('refskpd_id', $skpd_id)
+                  ->where('refperiode_id', $periode_id);
+            }], 'anggaran_rkt')
+            ->withSum(['indikatorSubkegiatans as total_anggaran_pk' => function($q) use ($skpd_id, $periode_id) {
+                $q->select(\DB::raw('SUM(CAST(anggaran_pk AS BIGINT))'))
+                  ->where('refskpd_id', $skpd_id)
+                  ->where('refperiode_id', $periode_id);
+            }], 'anggaran_pk');
 
         return DataTables::of($query)
             ->addIndexColumn()
@@ -63,7 +74,13 @@ class PkAnggaranProgramController extends Controller
             ->addColumn('nama_program', function($row) {
                 return $row->program->nama_program ?? '-';
             })
-            ->addColumn('anggaran_pk', function($row) {
+            ->addColumn('total_anggaran_renstra', function($row) {
+                return 'Rp. ' . number_format($row->total_anggaran_renstra ?? 0, 0, ',', '.');
+            })
+            ->addColumn('total_anggaran_rkt', function($row) {
+                return 'Rp. ' . number_format($row->total_anggaran_rkt ?? 0, 0, ',', '.');
+            })
+            ->addColumn('total_anggaran_pk', function($row) {
                 return 'Rp. ' . number_format($row->total_anggaran_pk ?? 0, 0, ',', '.');
             })
             ->make(true);

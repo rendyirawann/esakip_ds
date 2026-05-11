@@ -82,8 +82,10 @@
                         <thead>
                             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                 <th class="w-50px text-center">No</th>
-                                <th class="d-none">Sasaran</th>
-                                <th class="min-w-300px">Uraian Program</th>
+                                <th class="d-none">Sasaran Renstra</th>
+                                <th class="min-w-300px">Program</th>
+                                <th class="text-end min-w-150px">Anggaran Renstra</th>
+                                <th class="text-end min-w-150px">Anggaran RKT</th>
                                 <th class="text-end min-w-150px">Anggaran PK</th>
                             </tr>
                         </thead>
@@ -138,7 +140,9 @@
                 { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, className: 'text-center' },
                 { data: 'uraian_sasaran', name: 'uraian_sasaran', visible: false },
                 { data: 'nama_program', name: 'nama_program' },
-                { data: 'anggaran_pk', name: 'anggaran_pk', className: 'text-end' }
+                { data: 'total_anggaran_renstra', name: 'total_anggaran_renstra', className: 'text-end' },
+                { data: 'total_anggaran_rkt', name: 'total_anggaran_rkt', className: 'text-end text-dark' },
+                { data: 'total_anggaran_pk', name: 'total_anggaran_pk', className: 'text-end fw-bold text-primary' }
             ],
             order: [[1, 'asc']],
             drawCallback: function(settings) {
@@ -149,7 +153,7 @@
                 api.column(1, { page: 'current' }).data().each(function(group, i) {
                     if (last !== group) {
                         $(rows).eq(i).before(
-                            '<tr class="group bg-light-primary"><td colspan="3" class="fw-bolder text-gray-800 fs-6 py-3">Sasaran: ' + group + '</td></tr>'
+                            '<tr class="group bg-light"><td colspan="5" class="fw-bolder text-gray-800 fs-6 py-3">Sasaran Renstra: ' + group + '</td></tr>'
                         );
                         last = group;
                     }

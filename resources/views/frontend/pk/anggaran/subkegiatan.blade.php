@@ -85,6 +85,7 @@
                                 <th class="d-none">Kegiatan</th>
                                 <th class="min-w-250px">Sub Kegiatan</th>
                                 <th class="text-end">Anggaran Renstra</th>
+                                <th class="text-end">Anggaran RKT</th>
                                 <th class="text-end min-w-200px">Anggaran PK</th>
                                 <th class="text-center w-100px">Aksi</th>
                             </tr>
@@ -205,6 +206,7 @@
                 { data: 'nama_kegiatan', name: 'nama_kegiatan', visible: false },
                 { data: 'nama_subkegiatan', name: 'nama_subkegiatan' },
                 { data: 'anggaran_renstra', name: 'anggaran_renstra', className: 'text-end' },
+                { data: 'anggaran_rkt', name: 'anggaran_rkt', className: 'text-end text-dark' },
                 { data: 'anggaran_pk_input', name: 'anggaran_pk_input', className: 'text-end', orderable: false, searchable: false },
                 { 
                     data: null, 
@@ -229,7 +231,7 @@
                 api.column(1, { page: 'current' }).data().each(function(group, i) {
                     if (last !== group) {
                         $(rows).eq(i).before(
-                            '<tr class="group bg-light"><td colspan="5" class="fw-bolder text-gray-800 fs-6 py-3">Kegiatan: ' + group + '</td></tr>'
+                            '<tr class="group bg-light"><td colspan="6" class="fw-bolder text-gray-800 fs-6 py-3">Kegiatan: ' + group + '</td></tr>'
                         );
                         last = group;
                     }

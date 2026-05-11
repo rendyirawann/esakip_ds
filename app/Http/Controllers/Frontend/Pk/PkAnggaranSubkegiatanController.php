@@ -61,6 +61,10 @@ class PkAnggaranSubkegiatanController extends Controller
                 $anggaran = $row->cascading->subkegiatan_anggaran ?? 0;
                 return 'Rp. ' . number_format($anggaran, 0, ',', '.');
             })
+            ->addColumn('anggaran_rkt', function($row) {
+                $anggaran = $row->anggaran_rkt ?? 0;
+                return 'Rp. ' . number_format($anggaran, 0, ',', '.');
+            })
             ->addColumn('anggaran_pk_input', function($row) {
                 $val = $row->anggaran_pk ?? 0;
                 return '<div class="input-group input-group-sm w-150px ms-auto">

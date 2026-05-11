@@ -17,8 +17,8 @@ class PkProgramController extends Controller
         $user = Auth::guard('frontend')->user();
         $isSuperadmin = $user->hasRole(['Superadmin', 'superadmin']);
         
-        $skpd_id = $request->skpd_id;
-        $current_periode_id = $request->periode_id;
+        $skpd_id = $request->skpd_id ?? session('pk_program_skpd_id');
+        $current_periode_id = $request->periode_id ?? session('pk_program_periode_id');
 
         if (!$isSuperadmin) {
             $skpd_id = $user->refskpd_id ?? null;
@@ -38,8 +38,17 @@ class PkProgramController extends Controller
 
     public function data(Request $request)
     {
-        $skpd_id = $request->skpd_id;
-        $periode_id = $request->periode_id;
+        $skpd_id = $request->skpd_id ?? session('pk_program_skpd_id');
+        $periode_id = $request->periode_id ?? session('pk_program_periode_id');
+
+        if ($request->has('skpd_id') && $request->has('periode_id') && $request->skpd_id != null) {
+            session([
+                'pk_program_skpd_id' => $request->skpd_id,
+                'pk_program_periode_id' => $request->periode_id
+            ]);
+            $skpd_id = $request->skpd_id;
+            $periode_id = $request->periode_id;
+        }
 
         if (!$skpd_id || !$periode_id) {
             return DataTables::of(collect([]))->make(true);
