@@ -17,8 +17,8 @@ class RktAnggaranKegiatanController extends Controller
         $user = Auth::guard('frontend')->user();
         $isSuperadmin = $user->hasRole(['Superadmin', 'superadmin']);
         
-        $skpd_id = $request->skpd_id ?? session('rkt_anggaran_kegiatan_skpd_id');
-        $current_periode_id = $request->periode_id ?? session('rkt_anggaran_kegiatan_periode_id');
+        $skpd_id = $request->skpd_id;
+        $current_periode_id = $request->periode_id;
 
         if (!$isSuperadmin) {
             $skpd_id = $user->refskpd_id ?? null;
@@ -38,8 +38,8 @@ class RktAnggaranKegiatanController extends Controller
 
     public function data(Request $request)
     {
-        $skpd_id = $request->skpd_id ?? session('rkt_anggaran_kegiatan_skpd_id');
-        $periode_id = $request->periode_id ?? session('rkt_anggaran_kegiatan_periode_id');
+        $skpd_id = $request->skpd_id;
+        $periode_id = $request->periode_id;
 
         if (!$skpd_id || !$periode_id) {
             return DataTables::of(collect([]))->make(true);
@@ -87,6 +87,10 @@ class RktAnggaranKegiatanController extends Controller
             'rkt_anggaran_kegiatan_skpd_id' => $request->skpd_id,
             'rkt_anggaran_kegiatan_periode_id' => $request->periode_id
         ]);
+
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
+        }
 
         return redirect()->route('frontend.rkt.anggaran-kegiatan.index');
     }
