@@ -213,12 +213,18 @@ Route::prefix('frontend')->name('frontend.')->group(function () {
             Route::put('sasaran/indikator/{id}', [\App\Http\Controllers\Frontend\Renstra\SasaranRenstraController::class, 'updateIndikator'])->name('sasaran.indikator.update');
             Route::delete('sasaran/indikator/{id}', [\App\Http\Controllers\Frontend\Renstra\SasaranRenstraController::class, 'deleteIndikator'])->name('sasaran.indikator.destroy');
 
+            // Indikator Tujuan Renstra
+            Route::resource('indikator-tujuan', \App\Http\Controllers\Frontend\Renstra\IndikatorTujuanRenstraController::class);
+
             // Tujuan Renstra
             Route::resource('tujuan', \App\Http\Controllers\Frontend\Renstra\TujuanRenstraController::class);
             Route::post('tujuan/get-data', [\App\Http\Controllers\Frontend\Renstra\TujuanRenstraController::class, 'getData'])->name('tujuan.get-data');
             Route::get('tujuan/get-misi/{periode_id}', [\App\Http\Controllers\Frontend\Renstra\TujuanRenstraController::class, 'getMisi'])->name('tujuan.get-misi');
             Route::get('tujuan/get-tujuan-rpjmd/{misi_id}', [TujuanRenstraController::class, 'getTujuanRpjmd'])->name('tujuan.get-tujuan-rpjmd');
             Route::get('tujuan/get-sasaran-rpjmd/{tujuan_id}', [TujuanRenstraController::class, 'getSasaranRpjmd'])->name('tujuan.get-sasaran-rpjmd');
+
+            // Strategi Renstra
+            Route::resource('strategi', \App\Http\Controllers\Frontend\Renstra\StrategiRenstraController::class);
         });
         
         // Add more frontend routes here

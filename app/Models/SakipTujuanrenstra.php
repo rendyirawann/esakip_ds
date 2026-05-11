@@ -46,4 +46,9 @@ class SakipTujuanrenstra extends Model
         return $this->belongsTo(SakipSasaranrenstra::class, 'refsasaranrenstra_id', 'refsasaranrenstra_id');
     }
 
+    public function indikatorTujuanRenstra()
+    {
+        return $this->hasMany(SakipIndikatortujuanrenstra::class, 'reftujuanrenstra_id', 'reftujuanrenstra_id');
+    }
+
 }

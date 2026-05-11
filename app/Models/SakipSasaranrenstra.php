@@ -60,4 +60,9 @@ class SakipSasaranrenstra extends Model
     {
         return $this->hasMany(SakipIndikatorsasaranrenstra::class, 'refsasaranrenstra_id', 'refsasaranrenstra_id');
     }
+
+    public function strategiRenstra()
+    {
+        return $this->hasMany(SakipStrategi::class, 'refsasaranrenstra_id', 'refsasaranrenstra_id');
+    }
 }

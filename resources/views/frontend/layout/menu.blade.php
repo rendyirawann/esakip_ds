@@ -33,11 +33,11 @@
                     <div class="menu-sub menu-sub-lg-dropdown w-lg-250px px-lg-2 py-lg-4">
                         <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.renstra.sasaran.index') ? 'active' : '' }}" href="{{ route('frontend.renstra.sasaran.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Sasaran Renstra</span></a></div>
                         <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.renstra.tujuan.index') ? 'active' : '' }}" href="{{ route('frontend.renstra.tujuan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tujuan Renstra</span></a></div>
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Indikator Tujuan Renstra</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.renstra.indikator-tujuan.index') ? 'active' : '' }}" href="{{ route('frontend.renstra.indikator-tujuan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Indikator Tujuan Renstra</span></a></div>
                         <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Formulasi Renstra</span></a></div>
                     </div>
                 </div>
-                <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Strategi</span></a></div>
+                <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.renstra.strategi.index') ? 'active' : '' }}" href="{{ route('frontend.renstra.strategi.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Strategi</span></a></div>
                 <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Kebijakan</span></a></div>
                 <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Program</span></a></div>
                 <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Kegiatan</span></a></div>

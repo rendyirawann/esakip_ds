@@ -139,6 +139,12 @@ class TujuanRenstraController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        $tujuan = SakipTujuanrenstra::findOrFail($id);
+        return response()->json($tujuan);
+    }
+
     public function edit($id)
     {
         $tujuan = SakipTujuanrenstra::with('sasaranRenstra')->find($id);
