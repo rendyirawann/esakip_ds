@@ -1,0 +1,117 @@
+<?php
+
+namespace App\Http\Controllers\Frontend\Pkp;
+
+use App\Http\Controllers\Controller;
+use App\Models\SakipIndikatorsasaranrenstra;
+use App\Models\SakipSkpd;
+use App\Models\SakipPeriode;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
+
+class PkpSasaranController extends Controller
+{
+    public function index(Request $request)
+    {
+        $user = Auth::guard('frontend')->user();
+        $isSuperadmin = $user->hasRole(['Superadmin', 'superadmin']);
+        
+        $skpd_id = $request->skpd_id ?? session('pkp_sasaran_skpd_id');
+        $current_periode_id = $request->periode_id ?? session('pkp_sasaran_periode_id');
+
+        if (!$isSuperadmin) {
+            $skpd_id = $user->refskpd_id ?? null;
+        }
+
+        $skpds = SakipSkpd::where('skpd_isaktif', 'T')->orderBy('nama_skpd', 'asc')->get();
+        $periodes = SakipPeriode::orderBy('periode', 'desc')->get();
+        
+        $current_skpd = $skpd_id ? SakipSkpd::find($skpd_id) : null;
+        $current_periode = $current_periode_id ? SakipPeriode::find($current_periode_id) : null;
+
+        return view('frontend.pkp.sasaran.index', compact(
+            'skpds', 'periodes', 'isSuperadmin', 'current_skpd', 
+            'current_periode'
+        ));
+    }
+
+    public function data(Request $request)
+    {
+        $skpd_id = $request->skpd_id ?? session('pkp_sasaran_skpd_id');
+        $periode_id = $request->periode_id ?? session('pkp_sasaran_periode_id');
+
+        if ($request->has('skpd_id') && $request->has('periode_id') && $request->skpd_id != null) {
+            session([
+                'pkp_sasaran_skpd_id' => $request->skpd_id,
+                'pkp_sasaran_periode_id' => $request->periode_id
+            ]);
+            $skpd_id = $request->skpd_id;
+            $periode_id = $request->periode_id;
+        }
+
+        if (!$skpd_id || !$periode_id) {
+            return DataTables::of(collect([]))->make(true);
+        }
+
+        $query = SakipIndikatorsasaranrenstra::with(['sasaran'])
+            ->where('refskpd_id', $skpd_id)
+            ->where('refperiode_id', $periode_id);
+
+        return DataTables::of($query)
+            ->addIndexColumn()
+            ->addColumn('uraian_sasaran', function($row) {
+                return $row->sasaran ? strip_tags($row->sasaran->uraian_sasaranrenstra) : '-';
+            })
+            ->addColumn('target_rkt_display', function($row) {
+                return $row->target_rkt ?? '-';
+            })
+            ->addColumn('keterangan_rkt', function($row) {
+                return $row->keterangan ?? '-';
+            })
+            ->addColumn('target_pk_display', function($row) {
+                return $row->target_pk ?? '-';
+            })
+            ->addColumn('keterangan_pk_display', function($row) {
+                return $row->keterangan_pk ?? '-';
+            })
+            ->addColumn('target_pkp_display', function($row) {
+                return $row->target_pk_p ?? '-';
+            })
+            ->addColumn('keterangan_pkp_display', function($row) {
+                return $row->keterangan_pk_p ?? '-';
+            })
+            ->addColumn('action', function($row) {
+                return '<button type="button" class="btn btn-icon btn-sm btn-light-primary" onclick="editPkp('.$row->refindikatorsasaranrenstra_id.')">
+                            <i class="ki-outline ki-pencil fs-2"></i>
+                        </button>';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+    public function edit($id)
+    {
+        $indikator = SakipIndikatorsasaranrenstra::with('sasaran')->findOrFail($id);
+        return response()->json($indikator);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'target_pk_p' => 'required',
+            'keterangan_pk_p' => 'nullable'
+        ]);
+
+        $model = SakipIndikatorsasaranrenstra::find($request->id);
+        if ($model) {
+            $model->target_pk_p = $request->target_pk_p;
+            $model->keterangan_pk_p = $request->keterangan_pk_p;
+            $model->save();
+            return response()->json(['success' => true, 'message' => 'Data PK Perubahan berhasil disimpan!']);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Data tidak ditemukan.'], 404);
+    }
+}

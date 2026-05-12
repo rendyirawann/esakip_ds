@@ -373,6 +373,70 @@ Route::prefix('frontend')->name('frontend.')->group(function () {
             Route::post('anggaran-subkegiatan/update', [\App\Http\Controllers\Frontend\Pk\PkAnggaranSubkegiatanController::class, 'update'])->name('anggaran-subkegiatan.update');
         });
 
+        // PK Perubahan
+        Route::prefix('pkp')->name('pkp.')->group(function() {
+            // Target PKP Sasaran
+            Route::get('sasaran', [\App\Http\Controllers\Frontend\Pkp\PkpSasaranController::class, 'index'])->name('sasaran.index');
+            Route::get('sasaran/data', [\App\Http\Controllers\Frontend\Pkp\PkpSasaranController::class, 'data'])->name('sasaran.data');
+            Route::get('sasaran/{id}/edit', [\App\Http\Controllers\Frontend\Pkp\PkpSasaranController::class, 'edit'])->name('sasaran.edit');
+            Route::post('sasaran/store', [\App\Http\Controllers\Frontend\Pkp\PkpSasaranController::class, 'store'])->name('sasaran.store');
+
+            // Target PKP Triwulan Sasaran
+            Route::get('sasaran-triwulan', [\App\Http\Controllers\Frontend\Pkp\PkpTriwulanSasaranController::class, 'index'])->name('sasaran.triwulan.index');
+            Route::get('sasaran-triwulan/data', [\App\Http\Controllers\Frontend\Pkp\PkpTriwulanSasaranController::class, 'data'])->name('sasaran.triwulan.data');
+            Route::get('sasaran-triwulan/{id}/edit', [\App\Http\Controllers\Frontend\Pkp\PkpTriwulanSasaranController::class, 'edit'])->name('sasaran.triwulan.edit');
+            Route::post('sasaran-triwulan/store', [\App\Http\Controllers\Frontend\Pkp\PkpTriwulanSasaranController::class, 'store'])->name('sasaran.triwulan.store');
+
+            // Target PKP Program
+            Route::get('program', [\App\Http\Controllers\Frontend\Pkp\PkpProgramController::class, 'index'])->name('program.index');
+            Route::get('program/data', [\App\Http\Controllers\Frontend\Pkp\PkpProgramController::class, 'data'])->name('program.data');
+            Route::get('program/{id}/edit', [\App\Http\Controllers\Frontend\Pkp\PkpProgramController::class, 'edit'])->name('program.edit');
+            Route::post('program/store', [\App\Http\Controllers\Frontend\Pkp\PkpProgramController::class, 'store'])->name('program.store');
+
+            // Target PKP Triwulan Program
+            Route::get('program-triwulan', [\App\Http\Controllers\Frontend\Pkp\PkpTriwulanProgramController::class, 'index'])->name('program.triwulan.index');
+            Route::get('program-triwulan/data', [\App\Http\Controllers\Frontend\Pkp\PkpTriwulanProgramController::class, 'data'])->name('program.triwulan.data');
+            Route::get('program-triwulan/{id}/edit', [\App\Http\Controllers\Frontend\Pkp\PkpTriwulanProgramController::class, 'edit'])->name('program.triwulan.edit');
+            Route::post('program-triwulan/store', [\App\Http\Controllers\Frontend\Pkp\PkpTriwulanProgramController::class, 'store'])->name('program.triwulan.store');
+
+            // Target PKP Kegiatan
+            Route::get('kegiatan', [\App\Http\Controllers\Frontend\Pkp\PkpKegiatanController::class, 'index'])->name('kegiatan.index');
+            Route::get('kegiatan/data', [\App\Http\Controllers\Frontend\Pkp\PkpKegiatanController::class, 'data'])->name('kegiatan.data');
+            Route::get('kegiatan/{id}/edit', [\App\Http\Controllers\Frontend\Pkp\PkpKegiatanController::class, 'edit'])->name('kegiatan.edit');
+            Route::post('kegiatan/store', [\App\Http\Controllers\Frontend\Pkp\PkpKegiatanController::class, 'store'])->name('kegiatan.store');
+
+            // Target PKP Triwulan Kegiatan
+            Route::get('kegiatan-triwulan', [\App\Http\Controllers\Frontend\Pkp\PkpTriwulanKegiatanController::class, 'index'])->name('kegiatan.triwulan.index');
+            Route::get('kegiatan-triwulan/data', [\App\Http\Controllers\Frontend\Pkp\PkpTriwulanKegiatanController::class, 'data'])->name('kegiatan.triwulan.data');
+            Route::get('kegiatan-triwulan/{id}/edit', [\App\Http\Controllers\Frontend\Pkp\PkpTriwulanKegiatanController::class, 'edit'])->name('kegiatan.triwulan.edit');
+            Route::post('kegiatan-triwulan/store', [\App\Http\Controllers\Frontend\Pkp\PkpTriwulanKegiatanController::class, 'store'])->name('kegiatan.triwulan.store');
+
+            // Target PKP Sub Kegiatan
+            Route::get('subkegiatan', [\App\Http\Controllers\Frontend\Pkp\PkpSubkegiatanController::class, 'index'])->name('subkegiatan.index');
+            Route::get('subkegiatan/data', [\App\Http\Controllers\Frontend\Pkp\PkpSubkegiatanController::class, 'data'])->name('subkegiatan.data');
+            Route::get('subkegiatan/{id}/edit', [\App\Http\Controllers\Frontend\Pkp\PkpSubkegiatanController::class, 'edit'])->name('subkegiatan.edit');
+            Route::post('subkegiatan/store', [\App\Http\Controllers\Frontend\Pkp\PkpSubkegiatanController::class, 'store'])->name('subkegiatan.store');
+
+            // Target PKP Triwulan Sub Kegiatan
+            Route::get('subkegiatan-triwulan', [\App\Http\Controllers\Frontend\Pkp\PkpTriwulanSubkegiatanController::class, 'index'])->name('subkegiatan.triwulan.index');
+            Route::get('subkegiatan-triwulan/data', [\App\Http\Controllers\Frontend\Pkp\PkpTriwulanSubkegiatanController::class, 'data'])->name('subkegiatan.triwulan.data');
+            Route::get('subkegiatan-triwulan/{id}/edit', [\App\Http\Controllers\Frontend\Pkp\PkpTriwulanSubkegiatanController::class, 'edit'])->name('subkegiatan.triwulan.edit');
+            Route::post('subkegiatan-triwulan/store', [\App\Http\Controllers\Frontend\Pkp\PkpTriwulanSubkegiatanController::class, 'store'])->name('subkegiatan.triwulan.store');
+
+            // Anggaran Program PKP
+            Route::get('anggaran-program', [\App\Http\Controllers\Frontend\Pkp\PkpAnggaranProgramController::class, 'index'])->name('anggaran-program.index');
+            Route::get('anggaran-program/data', [\App\Http\Controllers\Frontend\Pkp\PkpAnggaranProgramController::class, 'data'])->name('anggaran-program.data');
+
+            // Anggaran Kegiatan PKP
+            Route::get('anggaran-kegiatan', [\App\Http\Controllers\Frontend\Pkp\PkpAnggaranKegiatanController::class, 'index'])->name('anggaran-kegiatan.index');
+            Route::get('anggaran-kegiatan/data', [\App\Http\Controllers\Frontend\Pkp\PkpAnggaranKegiatanController::class, 'data'])->name('anggaran-kegiatan.data');
+
+            // Anggaran Sub Kegiatan PKP
+            Route::get('anggaran-subkegiatan', [\App\Http\Controllers\Frontend\Pkp\PkpAnggaranSubkegiatanController::class, 'index'])->name('anggaran-subkegiatan.index');
+            Route::get('anggaran-subkegiatan/data', [\App\Http\Controllers\Frontend\Pkp\PkpAnggaranSubkegiatanController::class, 'data'])->name('anggaran-subkegiatan.data');
+            Route::post('anggaran-subkegiatan/update', [\App\Http\Controllers\Frontend\Pkp\PkpAnggaranSubkegiatanController::class, 'update'])->name('anggaran-subkegiatan.update');
+        });
+
         // Add more frontend routes here
     });
 });

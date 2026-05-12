@@ -113,38 +113,37 @@
                 <span class="menu-arrow d-lg-none"></span>
             </span>
             <div class="menu-sub menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-350px">
-                <div class="menu-item menu-accordion" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
-                    <span class="menu-link py-3"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target PK Perubahan Indikator Sasaran</span><span class="menu-arrow"></span></span>
+                <div class="menu-item menu-accordion {{ request()->is('frontend/pkp/sasaran*') ? 'here show' : '' }}" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
+                    <span class="menu-link py-3 {{ request()->is('frontend/pkp/sasaran*') ? 'active' : '' }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target PK Perubahan Indikator Sasaran</span><span class="menu-arrow"></span></span>
                     <div class="menu-sub menu-sub-lg-dropdown w-lg-200px px-lg-2 py-lg-4">
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pkp.sasaran.index') ? 'active' : '' }}" href="{{ route('frontend.pkp.sasaran.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pkp.sasaran.triwulan.*') ? 'active' : '' }}" href="{{ route('frontend.pkp.sasaran.triwulan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
                     </div>
                 </div>
-                <!-- Repeat other PK Perubahan items... -->
-                <div class="menu-item menu-accordion" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
-                    <span class="menu-link py-3"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target PK Perubahan Indikator Program</span><span class="menu-arrow"></span></span>
+                <div class="menu-item menu-accordion {{ request()->is('frontend/pkp/program*') ? 'here show' : '' }}" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
+                    <span class="menu-link py-3 {{ request()->is('frontend/pkp/program*') ? 'active' : '' }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target PK Perubahan Indikator Program</span><span class="menu-arrow"></span></span>
                     <div class="menu-sub menu-sub-lg-dropdown w-lg-200px px-lg-2 py-lg-4">
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pkp.program.index') ? 'active' : '' }}" href="{{ route('frontend.pkp.program.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pkp.program.triwulan.*') ? 'active' : '' }}" href="{{ route('frontend.pkp.program.triwulan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
                     </div>
                 </div>
-                <div class="menu-item menu-accordion" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
-                    <span class="menu-link py-3"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target PK Perubahan Indikator Kegiatan</span><span class="menu-arrow"></span></span>
+                <div class="menu-item menu-accordion {{ request()->is('frontend/pkp/kegiatan*') ? 'here show' : '' }}" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
+                    <span class="menu-link py-3 {{ request()->is('frontend/pkp/kegiatan*') ? 'active' : '' }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target PK Perubahan Indikator Kegiatan</span><span class="menu-arrow"></span></span>
                     <div class="menu-sub menu-sub-lg-dropdown w-lg-200px px-lg-2 py-lg-4">
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pkp.kegiatan.index') ? 'active' : '' }}" href="{{ route('frontend.pkp.kegiatan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pkp.kegiatan.triwulan.*') ? 'active' : '' }}" href="{{ route('frontend.pkp.kegiatan.triwulan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
                     </div>
                 </div>
-                <div class="menu-item menu-accordion" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
-                    <span class="menu-link py-3"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target PK Perubahan Indikator Sub Kegiatan</span><span class="menu-arrow"></span></span>
+                <div class="menu-item menu-accordion {{ request()->is('frontend/pkp/subkegiatan*') ? 'here show' : '' }}" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
+                    <span class="menu-link py-3 {{ request()->is('frontend/pkp/subkegiatan*') ? 'active' : '' }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Target PK Perubahan Indikator Sub Kegiatan</span><span class="menu-arrow"></span></span>
                     <div class="menu-sub menu-sub-lg-dropdown w-lg-200px px-lg-2 py-lg-4">
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pkp.subkegiatan.index') ? 'active' : '' }}" href="{{ route('frontend.pkp.subkegiatan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pkp.subkegiatan.triwulan.*') ? 'active' : '' }}" href="{{ route('frontend.pkp.subkegiatan.triwulan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
                     </div>
                 </div>
-                <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Anggaran Program PK Perubahan</span></a></div>
-                <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Anggaran Kegiatan PK Perubahan</span></a></div>
-                <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Anggaran Sub Kegiatan PK Perubahan</span></a></div>
+                <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pkp.anggaran-program.index') ? 'active' : '' }}" href="{{ route('frontend.pkp.anggaran-program.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Anggaran Program PK Perubahan</span></a></div>
+                <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pkp.anggaran-kegiatan.index') ? 'active' : '' }}" href="{{ route('frontend.pkp.anggaran-kegiatan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Anggaran Kegiatan PK Perubahan</span></a></div>
+                <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.pkp.anggaran-subkegiatan.index') ? 'active' : '' }}" href="{{ route('frontend.pkp.anggaran-subkegiatan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Anggaran Sub Kegiatan PK Perubahan</span></a></div>
             </div>
         </div>
 
