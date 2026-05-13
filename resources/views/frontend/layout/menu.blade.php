@@ -156,31 +156,31 @@
             </span>
             <div class="menu-sub menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-300px">
                 <div class="menu-item menu-accordion" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
-                    <span class="menu-link py-3"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Realisasi Indikator Sasaran</span><span class="menu-arrow"></span></span>
+                    <span class="menu-link py-3 {{ request()->routeIs('frontend.capaian.realisasi-sasaran.*') ? 'active' : '' }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Realisasi Indikator Sasaran</span><span class="menu-arrow"></span></span>
                     <div class="menu-sub menu-sub-lg-dropdown w-lg-200px px-lg-2 py-lg-4">
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.capaian.realisasi-sasaran.tahunan.*') ? 'active' : '' }}" href="{{ route('frontend.capaian.realisasi-sasaran.tahunan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.capaian.realisasi-sasaran.triwulan.*') ? 'active' : '' }}" href="{{ route('frontend.capaian.realisasi-sasaran.triwulan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
                     </div>
                 </div>
-                <div class="menu-item menu-accordion" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
-                    <span class="menu-link py-3"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Realisasi Indikator Program</span><span class="menu-arrow"></span></span>
+                <div class="menu-item menu-accordion {{ request()->routeIs('frontend.capaian.realisasi-program.*') ? 'here show' : '' }}" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
+                    <span class="menu-link py-3 {{ request()->routeIs('frontend.capaian.realisasi-program.*') ? 'active' : '' }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Realisasi Indikator Program</span><span class="menu-arrow"></span></span>
                     <div class="menu-sub menu-sub-lg-dropdown w-lg-200px px-lg-2 py-lg-4">
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.capaian.realisasi-program.tahunan.*') ? 'active' : '' }}" href="{{ route('frontend.capaian.realisasi-program.tahunan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.capaian.realisasi-program.triwulan.*') ? 'active' : '' }}" href="{{ route('frontend.capaian.realisasi-program.triwulan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
                     </div>
                 </div>
-                <div class="menu-item menu-accordion" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
-                    <span class="menu-link py-3"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Realisasi Indikator Kegiatan</span><span class="menu-arrow"></span></span>
+                <div class="menu-item menu-accordion {{ request()->routeIs('frontend.capaian.realisasi-kegiatan.*') ? 'here show' : '' }}" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
+                    <span class="menu-link py-3 {{ request()->routeIs('frontend.capaian.realisasi-kegiatan.*') ? 'active' : '' }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Realisasi Indikator Kegiatan</span><span class="menu-arrow"></span></span>
                     <div class="menu-sub menu-sub-lg-dropdown w-lg-200px px-lg-2 py-lg-4">
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.capaian.realisasi-kegiatan.tahunan.*') ? 'active' : '' }}" href="{{ route('frontend.capaian.realisasi-kegiatan.tahunan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.capaian.realisasi-kegiatan.triwulan.*') ? 'active' : '' }}" href="{{ route('frontend.capaian.realisasi-kegiatan.triwulan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
                     </div>
                 </div>
-                <div class="menu-item menu-accordion" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
-                    <span class="menu-link py-3"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Realisasi Indikator Sub Kegiatan</span><span class="menu-arrow"></span></span>
+                <div class="menu-item menu-accordion {{ request()->routeIs('frontend.capaian.realisasi-subkegiatan.*') ? 'here show' : '' }}" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start">
+                    <span class="menu-link py-3 {{ request()->routeIs('frontend.capaian.realisasi-subkegiatan.*') ? 'active' : '' }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Realisasi Indikator Sub Kegiatan</span><span class="menu-arrow"></span></span>
                     <div class="menu-sub menu-sub-lg-dropdown w-lg-200px px-lg-2 py-lg-4">
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
-                        <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.capaian.realisasi-subkegiatan.tahunan.*') ? 'active' : '' }}" href="{{ route('frontend.capaian.realisasi-subkegiatan.tahunan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Tahunan</span></a></div>
+                        <div class="menu-item"><a class="menu-link py-3 {{ request()->routeIs('frontend.capaian.realisasi-subkegiatan.triwulan.*') ? 'active' : '' }}" href="{{ route('frontend.capaian.realisasi-subkegiatan.triwulan.index') }}"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Triwulan</span></a></div>
                     </div>
                 </div>
                 <div class="menu-item"><a class="menu-link py-3" href="#"><span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">Penyerapan Anggaran</span></a></div>

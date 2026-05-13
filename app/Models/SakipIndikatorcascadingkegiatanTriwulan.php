@@ -36,4 +36,9 @@ class SakipIndikatorcascadingkegiatanTriwulan extends Model
         return $this->belongsTo(SakipKegiatan::class, 'refkegiatan_id', 'refkegiatan_id');
     }
 
+    public function indikator()
+    {
+        return $this->belongsTo(SakipIndikatorcascadingkegiatan::class, 'refindikatorkegiatan_id', 'refindikatorkegiatan_id');
+    }
+
 }

@@ -36,4 +36,9 @@ class SakipIndikatorcascadingprogramTriwulan extends Model
         return $this->belongsTo(SakipProgram::class, 'refprogram_id', 'refprogram_id');
     }
 
+    public function indikator()
+    {
+        return $this->belongsTo(SakipIndikatorcascadingprogram::class, 'refindikatorprogram_id', 'refindikatorprogram_id');
+    }
+
 }

@@ -437,6 +437,61 @@ Route::prefix('frontend')->name('frontend.')->group(function () {
             Route::post('anggaran-subkegiatan/update', [\App\Http\Controllers\Frontend\Pkp\PkpAnggaranSubkegiatanController::class, 'update'])->name('anggaran-subkegiatan.update');
         });
 
+        // =============================================
+        // CAPAIAN KINERJA
+        // =============================================
+        Route::prefix('capaian')->name('capaian.')->group(function () {
+
+            // Realisasi Sasaran - Tahunan
+            Route::get('realisasi-sasaran/tahunan', [\App\Http\Controllers\Frontend\Capaian\RealisasiSasaranTahunanController::class, 'index'])->name('realisasi-sasaran.tahunan.index');
+            Route::get('realisasi-sasaran/tahunan/data', [\App\Http\Controllers\Frontend\Capaian\RealisasiSasaranTahunanController::class, 'data'])->name('realisasi-sasaran.tahunan.data');
+            Route::get('realisasi-sasaran/tahunan/{id}/edit', [\App\Http\Controllers\Frontend\Capaian\RealisasiSasaranTahunanController::class, 'edit'])->name('realisasi-sasaran.tahunan.edit');
+            Route::post('realisasi-sasaran/tahunan/store', [\App\Http\Controllers\Frontend\Capaian\RealisasiSasaranTahunanController::class, 'store'])->name('realisasi-sasaran.tahunan.store');
+
+            // Realisasi Sasaran - Triwulan
+            Route::get('realisasi-sasaran/triwulan', [\App\Http\Controllers\Frontend\Capaian\RealisasiSasaranTriwulanController::class, 'index'])->name('realisasi-sasaran.triwulan.index');
+            Route::get('realisasi-sasaran/triwulan/data', [\App\Http\Controllers\Frontend\Capaian\RealisasiSasaranTriwulanController::class, 'data'])->name('realisasi-sasaran.triwulan.data');
+            Route::get('realisasi-sasaran/triwulan/{id}/edit', [\App\Http\Controllers\Frontend\Capaian\RealisasiSasaranTriwulanController::class, 'edit'])->name('realisasi-sasaran.triwulan.edit');
+            Route::post('realisasi-sasaran/triwulan/store', [\App\Http\Controllers\Frontend\Capaian\RealisasiSasaranTriwulanController::class, 'store'])->name('realisasi-sasaran.triwulan.store');
+
+            // Realisasi Program - Tahunan
+            Route::get('realisasi-program/tahunan', [\App\Http\Controllers\Frontend\Capaian\RealisasiProgramTahunanController::class, 'index'])->name('realisasi-program.tahunan.index');
+            Route::get('realisasi-program/tahunan/data', [\App\Http\Controllers\Frontend\Capaian\RealisasiProgramTahunanController::class, 'data'])->name('realisasi-program.tahunan.data');
+            Route::get('realisasi-program/tahunan/{id}/edit', [\App\Http\Controllers\Frontend\Capaian\RealisasiProgramTahunanController::class, 'edit'])->name('realisasi-program.tahunan.edit');
+            Route::post('realisasi-program/tahunan/store', [\App\Http\Controllers\Frontend\Capaian\RealisasiProgramTahunanController::class, 'store'])->name('realisasi-program.tahunan.store');
+
+            // Realisasi Program - Triwulan
+            Route::get('realisasi-program/triwulan', [\App\Http\Controllers\Frontend\Capaian\RealisasiProgramTriwulanController::class, 'index'])->name('realisasi-program.triwulan.index');
+            Route::get('realisasi-program/triwulan/data', [\App\Http\Controllers\Frontend\Capaian\RealisasiProgramTriwulanController::class, 'data'])->name('realisasi-program.triwulan.data');
+            Route::get('realisasi-program/triwulan/{id}/edit', [\App\Http\Controllers\Frontend\Capaian\RealisasiProgramTriwulanController::class, 'edit'])->name('realisasi-program.triwulan.edit');
+            Route::post('realisasi-program/triwulan/store', [\App\Http\Controllers\Frontend\Capaian\RealisasiProgramTriwulanController::class, 'store'])->name('realisasi-program.triwulan.store');
+
+            // Realisasi Kegiatan - Tahunan
+            Route::get('realisasi-kegiatan/tahunan', [\App\Http\Controllers\Frontend\Capaian\RealisasiKegiatanTahunanController::class, 'index'])->name('realisasi-kegiatan.tahunan.index');
+            Route::get('realisasi-kegiatan/tahunan/data', [\App\Http\Controllers\Frontend\Capaian\RealisasiKegiatanTahunanController::class, 'data'])->name('realisasi-kegiatan.tahunan.data');
+            Route::get('realisasi-kegiatan/tahunan/{id}/edit', [\App\Http\Controllers\Frontend\Capaian\RealisasiKegiatanTahunanController::class, 'edit'])->name('realisasi-kegiatan.tahunan.edit');
+            Route::post('realisasi-kegiatan/tahunan/store', [\App\Http\Controllers\Frontend\Capaian\RealisasiKegiatanTahunanController::class, 'store'])->name('realisasi-kegiatan.tahunan.store');
+
+            // Realisasi Kegiatan - Triwulan
+            Route::get('realisasi-kegiatan/triwulan', [\App\Http\Controllers\Frontend\Capaian\RealisasiKegiatanTriwulanController::class, 'index'])->name('realisasi-kegiatan.triwulan.index');
+            Route::get('realisasi-kegiatan/triwulan/data', [\App\Http\Controllers\Frontend\Capaian\RealisasiKegiatanTriwulanController::class, 'data'])->name('realisasi-kegiatan.triwulan.data');
+            Route::get('realisasi-kegiatan/triwulan/{id}/edit', [\App\Http\Controllers\Frontend\Capaian\RealisasiKegiatanTriwulanController::class, 'edit'])->name('realisasi-kegiatan.triwulan.edit');
+            Route::post('realisasi-kegiatan/triwulan/store', [\App\Http\Controllers\Frontend\Capaian\RealisasiKegiatanTriwulanController::class, 'store'])->name('realisasi-kegiatan.triwulan.store');
+
+            // Realisasi Sub Kegiatan - Tahunan
+            Route::get('realisasi-subkegiatan/tahunan', [\App\Http\Controllers\Frontend\Capaian\RealisasiSubkegiatanTahunanController::class, 'index'])->name('realisasi-subkegiatan.tahunan.index');
+            Route::get('realisasi-subkegiatan/tahunan/data', [\App\Http\Controllers\Frontend\Capaian\RealisasiSubkegiatanTahunanController::class, 'data'])->name('realisasi-subkegiatan.tahunan.data');
+            Route::get('realisasi-subkegiatan/tahunan/{id}/edit', [\App\Http\Controllers\Frontend\Capaian\RealisasiSubkegiatanTahunanController::class, 'edit'])->name('realisasi-subkegiatan.tahunan.edit');
+            Route::post('realisasi-subkegiatan/tahunan/store', [\App\Http\Controllers\Frontend\Capaian\RealisasiSubkegiatanTahunanController::class, 'store'])->name('realisasi-subkegiatan.tahunan.store');
+
+            // Realisasi Sub Kegiatan - Triwulan
+            Route::get('realisasi-subkegiatan/triwulan', [\App\Http\Controllers\Frontend\Capaian\RealisasiSubkegiatanTriwulanController::class, 'index'])->name('realisasi-subkegiatan.triwulan.index');
+            Route::get('realisasi-subkegiatan/triwulan/data', [\App\Http\Controllers\Frontend\Capaian\RealisasiSubkegiatanTriwulanController::class, 'data'])->name('realisasi-subkegiatan.triwulan.data');
+            Route::get('realisasi-subkegiatan/triwulan/{id}/edit', [\App\Http\Controllers\Frontend\Capaian\RealisasiSubkegiatanTriwulanController::class, 'edit'])->name('realisasi-subkegiatan.triwulan.edit');
+            Route::post('realisasi-subkegiatan/triwulan/store', [\App\Http\Controllers\Frontend\Capaian\RealisasiSubkegiatanTriwulanController::class, 'store'])->name('realisasi-subkegiatan.triwulan.store');
+        });
+
         // Add more frontend routes here
     });
 });
+
